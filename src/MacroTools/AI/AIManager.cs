@@ -7,6 +7,10 @@ namespace MacroTools.AI
   public static class AIManager
   {
     /// <summary>Registers a <see cref="Faction"/> to the <see cref="AIManager"/>, allowing it to be managed as an AI.</summary>
-    public static void Register(Faction faction) => faction.Player?.StartAIScript(faction.AIScriptPath);
+    public static void Register(Faction faction)
+    {
+      if (faction.AIScriptPath != null) 
+        faction.Player?.StartAIScript(faction.AIScriptPath);
+    }
   }
 }

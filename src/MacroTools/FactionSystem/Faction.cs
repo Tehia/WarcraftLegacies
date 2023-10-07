@@ -135,7 +135,7 @@ namespace MacroTools.FactionSystem
     public ScoreStatus ScoreStatus { get; private set; } = ScoreStatus.Undefeated;
 
     /// <summary>Determines AI behaviour when the <see cref="Faction"/> is controlled by a computer.</summary>
-    public string AIScriptPath { get; init; }
+    public string? AIScriptPath { get; init; }
     
     public string ColoredName => $"{PrefixCol}{_name}|r";
 
