@@ -19,6 +19,7 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
         StartingLumber = 700,
         CinematicMusic = "SadMystery",
         ControlPointDefenderUnitTypeId = Constants.UNIT_N0B6_CONTROL_POINT_DEFENDER_FROSTWOLF,
+        AIScriptPath = "AI/Frostwolf.ai",
         IntroText = @"You are playing as the honorable |cffff0000Frostwolf Clan|r.
 
 You begin in the Salt Flats, separated from your ally, the Warsong Clan in the North.

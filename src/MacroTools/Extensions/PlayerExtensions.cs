@@ -347,5 +347,12 @@ namespace MacroTools.Extensions
           unit.SetOwner(Player(PLAYER_NEUTRAL_AGGRESSIVE));
       }
     }
+
+    /// <summary>Starts an AI script for the specified player.</summary>
+    public static player StartAIScript(this player whichPlayer, string path)
+    {
+      StartMeleeAI(whichPlayer, path);
+      return whichPlayer;
+    }
   }
 }

@@ -101,6 +101,7 @@ namespace WarcraftLegacies.Source.Setup
       CenariusGhost.Setup(allLegendSetup.Druids);
       HelmOfDominationDropsWhenScourgeLeaves.Setup(artifactSetup.HelmOfDomination, allLegendSetup.Scourge.TheFrozenThrone);
       TagSummonedUnits.Setup();
+      AISetup.Setup();
     }
 
     private static void SetupControlPointManager()
