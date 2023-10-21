@@ -19,7 +19,7 @@ namespace Launcher.MapMigrations
         if (unit.StatsGoldBountyAwardedNumberOfDice != level)
           unit.StatsGoldBountyAwardedNumberOfDice = level;
         
-        if (unit.StatsGoldBountyAwardedNumberOfDice != 10)
+        if (unit.StatsGoldBountyAwardedNumberOfDice != 7)
           unit.StatsGoldBountyAwardedSidesPerDie = 4;
       }
 
