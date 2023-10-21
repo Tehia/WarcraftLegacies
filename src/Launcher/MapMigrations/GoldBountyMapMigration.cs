@@ -20,7 +20,7 @@ namespace Launcher.MapMigrations
           unit.StatsGoldBountyAwardedNumberOfDice = level;
         
         if (unit.StatsGoldBountyAwardedNumberOfDice != 4)
-          unit.StatsGoldBountyAwardedSidesPerDie = 4;
+          unit.StatsGoldBountyAwardedSidesPerDie = 10;
       }
 
       map.UnitObjectData = objectDatabase.GetAllData().UnitData;
