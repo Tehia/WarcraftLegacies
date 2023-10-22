@@ -1,5 +1,6 @@
 ﻿using MacroTools.ControlPointSystem;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace MacroTools
@@ -7,28 +8,33 @@ namespace MacroTools
   /// <summary>
   /// Performs basic checks during runtime to ensure that the map is configured correctly.
   /// </summary>
-  public static class RuntimeIntegrityChecker
+  public sealed class RuntimeIntegrityChecker : IExecutableService
   {
-    /// <summary>
-    /// Runs the <see cref="RuntimeIntegrityChecker"/>.
-    /// </summary>
-    public static void Setup()
+    private readonly FactionManager _factionManager;
+
+    public RuntimeIntegrityChecker(ServiceCollection services)
+    {
+      _factionManager = services.GetRequired<FactionManager>();
+    }
+    
+    /// <inheritdoc />
+    public void Execute()
     {
       NoNeutralPassiveVulnerableControlPoints();
       CheckUndefeatedResearchNames();
       CheckQuestResearchNames();
     }
 
-    private static void NoNeutralPassiveVulnerableControlPoints()
+    private void NoNeutralPassiveVulnerableControlPoints()
     {
       foreach (var controlPoint in ControlPointManager.Instance.GetAllControlPoints())
         if (controlPoint.Owner == Player(PLAYER_NEUTRAL_PASSIVE) && !BlzIsUnitInvulnerable(controlPoint.Unit))
           Logger.LogWarning($"{controlPoint.Name} is owned by Neutral Passive and is not invulnerable.");
     }
     
-    private static void CheckUndefeatedResearchNames()
+    private void CheckUndefeatedResearchNames()
     {
-      foreach (var faction in FactionManager.GetAllFactions())
+      foreach (var faction in _factionManager.GetAllFactions())
       {
         if (faction.UndefeatedResearch == 0)
           continue;
@@ -40,9 +46,9 @@ namespace MacroTools
       }
     }
     
-    private static void CheckQuestResearchNames()
+    private void CheckQuestResearchNames()
     {
-      foreach (var faction in FactionManager.GetAllFactions())
+      foreach (var faction in _factionManager.GetAllFactions())
       {
         foreach (var quest in faction.GetAllQuests())
         {

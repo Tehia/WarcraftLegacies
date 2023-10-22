@@ -34,6 +34,7 @@ namespace WarcraftLegacies.Source.Setup
       _services.Add(new ArtifactSetup(_services));
       _services.Add(new AllLegendSetup(_services));
       _services.Add(new TeamSetup());
+      _services.Add(new RuntimeIntegrityChecker(_services));
       _services.ConfigureFactions();
     }
 
@@ -115,7 +116,6 @@ namespace WarcraftLegacies.Source.Setup
       CapturableUnitSetup.Setup(preplacedUnitSystem);
       EyeOfSargerasPickup.Setup();
       SacrificeAcolyte.Setup();
-      RuntimeIntegrityChecker.Setup();
       PeonsStartHarvestingShips.Setup(preplacedUnitSystem);
       DarkPortalControlNexusSetup.Setup(preplacedUnitSystem);
       CenariusGhost.Setup(allLegendSetup.Druids);
