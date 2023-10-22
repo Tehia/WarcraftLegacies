@@ -9,8 +9,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Responsible for creating and containing the Ironforge <see cref="Faction"/>.
   /// </summary>
-  public class IronforgeSetup : ISetupStep
+  public class IronforgeSetup : IService
   {
+    public IronforgeSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Ironforge { get; private set; }
     
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

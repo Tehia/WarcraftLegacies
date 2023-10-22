@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MacroTools.Extensions;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace MacroTools.FactionSystem
@@ -9,23 +10,18 @@ namespace MacroTools.FactionSystem
   /// <summary>
   ///   Responsible for the management of all <see cref="Faction" />s and <see cref="Team" />s in the game.
   /// </summary>
-  public static class FactionManager
+  public sealed class FactionManager : IService
   {
     private static readonly Dictionary<string, Team> TeamsByName = new();
     private static readonly List<Team> AllTeams = new();
     private static readonly Dictionary<string, Faction> FactionsByName = new();
 
     /// <summary>
-    ///   Fired when a <see cref="Faction" /> is registered to the <see cref="FactionManager" />.
-    /// </summary>
-    public static event EventHandler<Faction>? FactionRegistered;
-
-    /// <summary>
     /// Fired when any <see cref="Faction"/> changes its name.
     /// </summary>
-    public static event EventHandler<Faction>? AnyFactionNameChanged; //todo: remove this; shouldn't need static events of this nature
+    public event EventHandler<Faction>? AnyFactionNameChanged; //todo: remove this; shouldn't need static events of this nature
 
-    private static void OnFactionNameChange(object? sender, FactionNameChangeEventArgs args)
+    private void OnFactionNameChange(object? sender, FactionNameChangeEventArgs args)
     {
       try
       {
@@ -39,17 +35,17 @@ namespace MacroTools.FactionSystem
       }
     }
 
-    public static List<Faction> GetAllFactions()
+    public List<Faction> GetAllFactions()
     {
       return FactionsByName.Values.ToList();
     }
     
-    public static List<Team> GetAllTeams()
+    public List<Team> GetAllTeams()
     {
       return AllTeams.ToList();
     }
 
-    public static bool TeamWithNameExists(string teamName)
+    public bool TeamWithNameExists(string teamName)
     {
       return TeamsByName.ContainsKey(teamName.ToLower());
     }
@@ -58,15 +54,15 @@ namespace MacroTools.FactionSystem
     /// Returns the <see cref="Team"/> with the specified name if one exists.
     /// Returns null otherwise.
     /// </summary>
-    public static Team? GetTeamByName(string teamName) =>
+    public Team? GetTeamByName(string teamName) =>
       TeamsByName.TryGetValue(teamName.ToLower(), out var team) ? team : null;
 
-    public static Faction? GetFromPlayer(player whichPlayer)
+    public Faction? GetFromPlayer(player whichPlayer)
     {
       return PlayerData.ByHandle(whichPlayer)?.Faction;
     }
 
-    public static bool FactionWithNameExists(string name)
+    public bool FactionWithNameExists(string name)
     {
       return FactionsByName.ContainsKey(name.ToLower());
     }
@@ -82,27 +78,24 @@ namespace MacroTools.FactionSystem
     ///   Registers a <see cref="Faction" /> to the <see cref="FactionManager" />,
     ///   allowing it to be retrieved globally and fire global events.
     /// </summary>
-    public static void Register(Faction faction)
+    public void Register(Faction faction)
     {
       if (!FactionsByName.ContainsKey(faction.Name.ToLower()))
       {
         FactionsByName[faction.Name.ToLower()] = faction;
-        FactionRegistered?.Invoke(faction, faction);
         faction.NameChanged += OnFactionNameChange;
       }
       else
       {
         throw new Exception($"Attempted to register faction that already exists with name {faction}.");
       }
-
-      FactionRegistered?.Invoke(faction, faction);
     }
 
     /// <summary>
     ///   Registers a <see cref="Team" /> to the <see cref="FactionManager" />,
     ///   allowing it to be retrieved globally and fire global events.
     /// </summary>
-    public static void Register(Team team)
+    public void Register(Team team)
     {
       if (!TeamsByName.ContainsKey(team.Name.ToLower()))
       {

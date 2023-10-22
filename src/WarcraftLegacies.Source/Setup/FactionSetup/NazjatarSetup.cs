@@ -5,8 +5,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class NazjatarSetup : ISetupStep
+  public class NazjatarSetup : IService
   {
+    public NazjatarSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Nazjatar { get; private set; }
     
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

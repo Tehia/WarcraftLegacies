@@ -7,8 +7,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Responsible for creating and containing the Stormwind <see cref="Faction"/>.
   /// </summary>
-  public class StormwindSetup : ISetupStep
+  public class StormwindSetup : IService
   {
+    public StormwindSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Stormwind { get; private set; }
 
     public static void Setup()

@@ -5,8 +5,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class CthunSetup : ISetupStep
+  public class CthunSetup : IService
   {
+    public CthunSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Cthun { get; private set; }
     
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

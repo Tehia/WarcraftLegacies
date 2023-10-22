@@ -9,7 +9,7 @@ namespace WarcraftLegacies.Source.Setup
   /// <summary>
   /// Responsible for setting up and storing all <see cref="Artifact"/>s.
   /// </summary>
-  public sealed class ArtifactSetup : ISetupStep
+  public sealed class ArtifactSetup : IService
   {
     private const float DummyX = 20195;
     private const float DummyY = 24177;
@@ -97,9 +97,9 @@ namespace WarcraftLegacies.Source.Setup
     /// <summary>
     /// Sets up <see cref="ArtifactSetup"/>.
     /// </summary>
-    public ArtifactSetup(SetupStepCollection setupSteps)
+    public ArtifactSetup(ServiceCollection services)
     {
-      var preplacedUnitSystem = setupSteps.GetRequired<PreplacedUnitSystem>();
+      var preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
       
       CrownOfStormwind = new Artifact(CreateItem(FourCC("I002"), DummyX, DummyY));
       UnitAddItem(preplacedUnitSystem.GetUnit(FourCC("n021")), CrownOfStormwind.Item); //Hogger

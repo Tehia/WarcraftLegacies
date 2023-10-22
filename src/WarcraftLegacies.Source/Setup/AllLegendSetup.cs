@@ -8,7 +8,7 @@ namespace WarcraftLegacies.Source.Setup
   /// <summary>
   /// Initializes and maintains references to all <see cref="Legend"/>s.
   /// </summary>
-  public sealed class AllLegendSetup : IExecutableSetupStep
+  public sealed class AllLegendSetup : IExecutableService
   {
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
@@ -107,10 +107,10 @@ namespace WarcraftLegacies.Source.Setup
     /// <summary>
     /// Initializes a new instance of the <see cref="AllLegendSetup"/> class.
     /// </summary>
-    public AllLegendSetup(SetupStepCollection setupSteps)
+    public AllLegendSetup(ServiceCollection services)
     {
-      _preplacedUnitSystem = setupSteps.GetRequired<PreplacedUnitSystem>();
-      var artifactSetup = setupSteps.GetRequired<ArtifactSetup>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
+      var artifactSetup = services.GetRequired<ArtifactSetup>();
       
       Dalaran = new LegendDalaran(_preplacedUnitSystem);
       Draenei = new LegendDraenei(_preplacedUnitSystem);

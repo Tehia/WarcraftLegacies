@@ -11,7 +11,7 @@ namespace MacroTools.Save
   /// <summary>
   /// Manager class for saving and loading player settings.
   /// </summary>
-  public sealed class SaveManager : ISetupStep
+  public sealed class SaveManager : IService
   {
     public static Dictionary<player, PlayerSettings> SavesByPlayer { get; } = new();
     private static SaveSystem<PlayerSettings>? _saveSystem;

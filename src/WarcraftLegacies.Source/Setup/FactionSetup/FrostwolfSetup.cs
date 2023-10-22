@@ -6,8 +6,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class FrostwolfSetup : ISetupStep
+  public class FrostwolfSetup : IService
   {
+    public FrostwolfSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Frostwolf { get; private set; }
     
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

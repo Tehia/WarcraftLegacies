@@ -14,7 +14,7 @@ namespace MacroTools
   ///   Once initialized, the system contains a reference to all preplaced units on the map.
   ///   Shutdown should be called once game has finished initializing.
   /// </summary>
-  public sealed class PreplacedUnitSystem : ISetupStep
+  public sealed class PreplacedUnitSystem : IService
   {
     private readonly Dictionary<int, List<unit>> _unitsByTypeId = new();
     private readonly Dictionary<int, List<destructable>> _destructablesByTypeId = new();

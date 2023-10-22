@@ -6,8 +6,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class KultirasSetup : ISetupStep
+  public class KultirasSetup : IService
   {
+    public KultirasSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Kultiras { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

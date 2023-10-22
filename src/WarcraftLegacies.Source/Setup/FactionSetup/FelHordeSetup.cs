@@ -7,8 +7,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class FelHordeSetup : ISetupStep
+  public class FelHordeSetup : IService
   {
+    public FelHordeSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? FelHorde { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

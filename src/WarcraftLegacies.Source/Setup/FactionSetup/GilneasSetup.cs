@@ -7,8 +7,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class GilneasSetup : ISetupStep
+  public class GilneasSetup : IService
   {
+    public GilneasSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Gilneas { get; private set; }
     
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

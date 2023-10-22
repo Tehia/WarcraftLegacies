@@ -3,7 +3,7 @@ using MacroTools.Setup;
 
 namespace WarcraftLegacies.Source.Setup
 {
-  public sealed class TeamSetup : ISetupStep{
+  public sealed class TeamSetup : IService{
     public static Team Legion { get; private set; }
     public static Team Alliance { get; private set; }
     public static Team NorthAlliance { get; private set; }

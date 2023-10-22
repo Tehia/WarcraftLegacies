@@ -6,8 +6,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class WarsongSetup : ISetupStep
+  public class WarsongSetup : IService
   {
+    public WarsongSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? WarsongClan { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

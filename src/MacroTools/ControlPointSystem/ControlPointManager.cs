@@ -13,7 +13,7 @@ namespace MacroTools.ControlPointSystem
   /// <summary>
   /// Responsible for managing all <see cref="ControlPoint"/>s.
   /// </summary>
-  public sealed class ControlPointManager : ISetupStep
+  public sealed class ControlPointManager : IService
   {
     static ControlPointManager()
     {

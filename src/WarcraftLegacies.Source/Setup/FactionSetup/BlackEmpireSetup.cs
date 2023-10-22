@@ -5,8 +5,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class BlackEmpireSetup : ISetupStep
+  public class BlackEmpireSetup : IService
   {
+    public BlackEmpireSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? BlackEmpire { get; private set; }
     
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

@@ -5,8 +5,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class DraeneiSetup : ISetupStep
+  public class DraeneiSetup : IService
   {
+    public DraeneiSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Draenei { get; private set; }
 
     public static void Setup()

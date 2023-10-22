@@ -8,13 +8,13 @@ namespace WarcraftLegacies.Source.Setup
 {
   public static class SetupStepCollectionExtensions
   {
-    public static void ConfigureSaveManager(this SetupStepCollection setupStepCollection)
+    public static void ConfigureSaveManager(this ServiceCollection serviceCollection)
     {
       var saveManager = new SaveManager();
-      setupStepCollection.Add(saveManager);
+      serviceCollection.Add(saveManager);
     }
 
-    public static void ConfigureControlPointManager(this SetupStepCollection setupStepCollection)
+    public static void ConfigureControlPointManager(this ServiceCollection serviceCollection)
     {
       var controlPointManager = new ControlPointManager
       {
@@ -33,38 +33,34 @@ namespace WarcraftLegacies.Source.Setup
           ControlLevelMaximum = 30
         }
       };
-      setupStepCollection.Add(controlPointManager);
+      serviceCollection.Add(controlPointManager);
     }
 
-    public static void ConfigureFactions(this SetupStepCollection setupStepCollection)
+    public static void ConfigureFactions(this ServiceCollection services)
     {
-      var preplacedUnitSystem = setupStepCollection.GetRequired<PreplacedUnitSystem>();
-      var artifactSetup = setupStepCollection.GetRequired<ArtifactSetup>();
-      var allLegendSetup = setupStepCollection.GetRequired<AllLegendSetup>();
-
-      setupStepCollection.Add(new ScourgeSetup(preplacedUnitSystem, artifactSetup.HelmOfDomination));
-      setupStepCollection.Add(new LegionSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new LordaeronSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new DalaranSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new QuelthalasSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new SentinelsSetup(preplacedUnitSystem, allLegendSetup));
-      setupStepCollection.Add(new DruidsSetup(preplacedUnitSystem, allLegendSetup));
-      setupStepCollection.Add(new FelHordeSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new FrostwolfSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new WarsongSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new StormwindSetup());
-      setupStepCollection.Add(new IronforgeSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new KultirasSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new IllidariSetup());
-      setupStepCollection.Add(new GoblinSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new DraeneiSetup());
-      setupStepCollection.Add(new ZandalarSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new SunfurySetup(preplacedUnitSystem));
-      setupStepCollection.Add(new GilneasSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new CthunSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new NazjatarSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new BlackEmpireSetup(preplacedUnitSystem));
-      setupStepCollection.Add(new TwilightHammerSetup(preplacedUnitSystem));
+      services.Add(new ScourgeSetup(services));
+      services.Add(new LegionSetup(services));
+      services.Add(new LordaeronSetup(services));
+      services.Add(new DalaranSetup(services));
+      services.Add(new QuelthalasSetup(services));
+      services.Add(new SentinelsSetup(services));
+      services.Add(new DruidsSetup(services));
+      services.Add(new FelHordeSetup(services));
+      services.Add(new FrostwolfSetup(services));
+      services.Add(new WarsongSetup(services));
+      services.Add(new StormwindSetup(services));
+      services.Add(new IronforgeSetup(services));
+      services.Add(new KultirasSetup(services));
+      services.Add(new IllidariSetup(services));
+      services.Add(new GoblinSetup(services));
+      services.Add(new DraeneiSetup(services));
+      services.Add(new ZandalarSetup(services));
+      services.Add(new SunfurySetup(services));
+      services.Add(new GilneasSetup(services));
+      services.Add(new CthunSetup(services));
+      services.Add(new NazjatarSetup(services));
+      services.Add(new BlackEmpireSetup(services));
+      services.Add(new TwilightHammerSetup(services));
     }
   }
 }

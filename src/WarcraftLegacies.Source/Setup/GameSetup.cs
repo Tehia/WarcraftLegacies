@@ -24,22 +24,22 @@ namespace WarcraftLegacies.Source.Setup
   /// </summary>
   public sealed class GameSetup
   {
-    private readonly SetupStepCollection _setupSteps = new();
+    private readonly ServiceCollection _services = new();
     
     public void ConfigureSetupSteps()
     {
-      _setupSteps.ConfigureSaveManager();
-      _setupSteps.ConfigureControlPointManager();
-      _setupSteps.Add(new PreplacedUnitSystem());
-      _setupSteps.Add(new ArtifactSetup(_setupSteps));
-      _setupSteps.Add(new AllLegendSetup(_setupSteps));
-      _setupSteps.Add(new TeamSetup());
-      _setupSteps.ConfigureFactions();
+      _services.ConfigureSaveManager();
+      _services.ConfigureControlPointManager();
+      _services.Add(new PreplacedUnitSystem());
+      _services.Add(new ArtifactSetup(_services));
+      _services.Add(new AllLegendSetup(_services));
+      _services.Add(new TeamSetup());
+      _services.ConfigureFactions();
     }
 
     public void ExecuteSetupSteps()
     {
-      foreach (var setupStep in _setupSteps.GetAllExecutableSetupSteps()) 
+      foreach (var setupStep in _services.GetAllExecutableSetupSteps()) 
         setupStep.Execute();
     }
     

@@ -7,8 +7,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class DalaranSetup : ISetupStep
+  public class DalaranSetup : IService
   {
+    public DalaranSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Dalaran { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

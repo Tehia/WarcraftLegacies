@@ -7,8 +7,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class ZandalarSetup : ISetupStep
+  public class ZandalarSetup : IService
   {
+    public ZandalarSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction Zandalar { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

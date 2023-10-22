@@ -5,8 +5,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class TwilightHammerSetup : ISetupStep
+  public class TwilightHammerSetup : IService
   {
+    public TwilightHammerSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? TwilightHammer { get; private set; }
     
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

@@ -9,8 +9,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class DruidsSetup : ISetupStep
+  public class DruidsSetup : IService
   {
+    public DruidsSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Druids { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem, AllLegendSetup allLegendSetup)

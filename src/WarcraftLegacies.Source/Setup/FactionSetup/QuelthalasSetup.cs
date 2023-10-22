@@ -6,8 +6,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class QuelthalasSetup : ISetupStep
+  public class QuelthalasSetup : IService
   {
+    public QuelthalasSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Quelthalas { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

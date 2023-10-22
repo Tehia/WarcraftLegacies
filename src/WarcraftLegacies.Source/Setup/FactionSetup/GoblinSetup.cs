@@ -11,8 +11,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Setup for the Goblin <see cref="Faction"/>
   /// </summary>
-  public class GoblinSetup : ISetupStep
+  public class GoblinSetup : IService
   {
+    public GoblinSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction Goblin { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem)

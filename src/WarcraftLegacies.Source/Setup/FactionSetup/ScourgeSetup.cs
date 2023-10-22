@@ -1,5 +1,4 @@
 ﻿using MacroTools;
-using MacroTools.ArtifactSystem;
 using MacroTools.FactionSystem;
 using MacroTools.Powers;
 using MacroTools.Setup;
@@ -8,12 +7,18 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public sealed class ScourgeSetup : ISetupStep
+  public sealed class ScourgeSetup : IExecutableService
   {
-    public static Faction? Scourge { get; private set; }
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+    private readonly FactionManager _factionManager;
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem, Artifact helmOfDomination)
+    public Faction Scourge { get; }
+    
+    public ScourgeSetup(ServiceCollection services)
     {
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
+      _factionManager = services.GetRequired<FactionManager>();
+      
       Scourge = new Faction("Scourge", PLAYER_COLOR_PURPLE, "|c00540081",
         @"ReplaceableTextures\CommandButtons\BTNRevenant.blp")
       {
@@ -33,7 +38,10 @@ Coordinate with the Burning Legion and use the Plague of Undeath to sweep Lordae
 
 When the Plague hits Lordaeron, a great portal will be opened between Dragonblight and Scholomance."
       };
-
+    }
+    
+    public void Execute()
+    {
       //Buildings
       Scourge.ModObjectLimit(FourCC("unpl"), Faction.UNLIMITED); //Necropolis
       Scourge.ModObjectLimit(FourCC("unp1"), Faction.UNLIMITED); //Halls of the Dead
@@ -131,9 +139,9 @@ When the Plague hits Lordaeron, a great portal will be opened between Dragonblig
         });
       Scourge.AddPower(visionPower);
 
-      Scourge.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-4939, 18803)));
+      Scourge.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-4939, 18803)));
 
-      FactionManager.Register(Scourge);
+      _factionManager.Register(Scourge);
     }
   }
 }

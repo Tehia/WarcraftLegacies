@@ -10,8 +10,13 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class SentinelsSetup : ISetupStep
+  public class SentinelsSetup : IService
   {
+    public SentinelsSetup(ServiceCollection services)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public static Faction? Sentinels { get; private set; }
 
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem, AllLegendSetup allLegendSetup)
