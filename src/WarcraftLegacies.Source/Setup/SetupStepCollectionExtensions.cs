@@ -2,6 +2,7 @@
 using MacroTools.ControlPointSystem;
 using MacroTools.Save;
 using MacroTools.Setup;
+using WarcraftLegacies.Source.Setup.FactionSetup;
 
 namespace WarcraftLegacies.Source.Setup
 {
@@ -10,7 +11,7 @@ namespace WarcraftLegacies.Source.Setup
     public static void ConfigureSaveManager(this SetupStepCollection setupStepCollection)
     {
       var saveManager = new SaveManager();
-      setupStepCollection.AddSingleton(saveManager);
+      setupStepCollection.Add(saveManager);
     }
     
     public static void ConfigureControlPointManager(this SetupStepCollection setupStepCollection)
@@ -32,7 +33,39 @@ namespace WarcraftLegacies.Source.Setup
           ControlLevelMaximum = 30
         }
       };
-      setupStepCollection.AddSingleton(controlPointManager);
+      setupStepCollection.Add(controlPointManager);
+    }
+    
+    public static void ConfigureFactions(this SetupStepCollection setupStepCollection)
+    {
+      var preplacedUnitSystem = setupStepCollection.GetRequired<PreplacedUnitSystem>();
+      var artifactSetup = setupStepCollection.GetRequired<ArtifactSetup>();
+      var allLegendSetup = setupStepCollection.GetRequired<AllLegendSetup>();
+      
+      ScourgeSetup.Setup(preplacedUnitSystem, artifactSetup.HelmOfDomination);
+      LegionSetup.Setup(preplacedUnitSystem);
+      LordaeronSetup.Setup(preplacedUnitSystem);
+      DalaranSetup.Setup(preplacedUnitSystem);
+      QuelthalasSetup.Setup(preplacedUnitSystem);
+      SentinelsSetup.Setup(preplacedUnitSystem, allLegendSetup);
+      DruidsSetup.Setup(preplacedUnitSystem, allLegendSetup);
+      FelHordeSetup.Setup(preplacedUnitSystem);
+      FrostwolfSetup.Setup(preplacedUnitSystem);
+      WarsongSetup.Setup(preplacedUnitSystem);
+      StormwindSetup.Setup();
+      IronforgeSetup.Setup(preplacedUnitSystem);
+      KultirasSetup.Setup(preplacedUnitSystem);
+      IllidariSetup.Setup();
+      GoblinSetup.Setup(preplacedUnitSystem);
+      DraeneiSetup.Setup();
+      ZandalarSetup.Setup(preplacedUnitSystem);
+      SunfurySetup.Setup(preplacedUnitSystem);
+      GilneasSetup.Setup(preplacedUnitSystem);
+
+      CthunSetup.Setup(preplacedUnitSystem);
+      NazjatarSetup.Setup(preplacedUnitSystem);
+      BlackEmpireSetup.Setup(preplacedUnitSystem);
+      TwilightHammerSetup.Setup(preplacedUnitSystem);
     }
   }
 }

@@ -30,18 +30,17 @@ namespace WarcraftLegacies.Source.Setup
     {
       _setupSteps.ConfigureSaveManager();
       _setupSteps.ConfigureControlPointManager();
-      _setupSteps.AddSingleton(new PreplacedUnitSystem());
-      _setupSteps.AddSingleton(new ArtifactSetup(_setupSteps));
-      _setupSteps.AddSingleton(new AllLegendSetup());
-      _setupSteps.AddSingleton(new TeamSetup());
-      _setupSteps.AddSingleton(new AllFactionSetup());
+      _setupSteps.Add(new PreplacedUnitSystem());
+      _setupSteps.Add(new ArtifactSetup(_setupSteps));
+      _setupSteps.Add(new AllLegendSetup(_setupSteps));
+      _setupSteps.Add(new TeamSetup());
+      _setupSteps.ConfigureFactions();
     }
 
     public void ExecuteSetupSteps()
     {
-      _setupSteps.GetRequiredSetupStep<AllLegendSetup>().RegisterLegends();
-      _setupSteps.GetRequiredSetupStep<TeamSetup>().RegisterTeams();
-      _setupSteps.GetRequiredSetupStep<AllFactionSetup>().RegisterFactions();
+      foreach (var setupStep in _setupSteps.GetAllExecutableSetupSteps()) 
+        setupStep.Execute();
     }
     
     /// <summary>

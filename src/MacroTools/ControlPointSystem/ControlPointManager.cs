@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MacroTools.Extensions;
 using MacroTools.Libraries;
+using MacroTools.Setup;
 using WCSharp.Events;
 using static War3Api.Common;
 using static War3Api.Blizzard;
@@ -12,7 +13,7 @@ namespace MacroTools.ControlPointSystem
   /// <summary>
   /// Responsible for managing all <see cref="ControlPoint"/>s.
   /// </summary>
-  public sealed class ControlPointManager
+  public sealed class ControlPointManager : ISetupStep
   {
     static ControlPointManager()
     {

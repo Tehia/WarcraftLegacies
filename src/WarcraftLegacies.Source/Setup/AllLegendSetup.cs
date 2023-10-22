@@ -8,8 +8,10 @@ namespace WarcraftLegacies.Source.Setup
   /// <summary>
   /// Initializes and maintains references to all <see cref="Legend"/>s.
   /// </summary>
-  public sealed class AllLegendSetup : ISetupStep
+  public sealed class AllLegendSetup : IExecutableSetupStep
   {
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     /// <summary>
     /// Contains references to all Dalaran <see cref="Legend"/>s.
     /// </summary>
@@ -105,37 +107,40 @@ namespace WarcraftLegacies.Source.Setup
     /// <summary>
     /// Initializes a new instance of the <see cref="AllLegendSetup"/> class.
     /// </summary>
-    public AllLegendSetup(PreplacedUnitSystem preplacedUnitSystem, ArtifactSetup artifactSetup)
+    public AllLegendSetup(SetupStepCollection setupSteps)
     {
-      Dalaran = new LegendDalaran(preplacedUnitSystem);
-      Draenei = new LegendDraenei(preplacedUnitSystem);
-      Druids = new LegendDruids(preplacedUnitSystem);
-      FelHorde = new LegendFelHorde(preplacedUnitSystem);
-      Frostwolf = new LegendFrostwolf(preplacedUnitSystem);
-      Goblin = new LegendGoblin(preplacedUnitSystem);
-      Ironforge = new LegendIronforge(preplacedUnitSystem);
-      Kultiras = new LegendKultiras(preplacedUnitSystem);
-      Legion = new LegendLegion(preplacedUnitSystem);
-      Lordaeron = new LegendLordaeron(preplacedUnitSystem, artifactSetup);
+      _preplacedUnitSystem = setupSteps.GetRequired<PreplacedUnitSystem>();
+      var artifactSetup = setupSteps.GetRequired<ArtifactSetup>();
+      
+      Dalaran = new LegendDalaran(_preplacedUnitSystem);
+      Draenei = new LegendDraenei(_preplacedUnitSystem);
+      Druids = new LegendDruids(_preplacedUnitSystem);
+      FelHorde = new LegendFelHorde(_preplacedUnitSystem);
+      Frostwolf = new LegendFrostwolf(_preplacedUnitSystem);
+      Goblin = new LegendGoblin(_preplacedUnitSystem);
+      Ironforge = new LegendIronforge(_preplacedUnitSystem);
+      Kultiras = new LegendKultiras(_preplacedUnitSystem);
+      Legion = new LegendLegion(_preplacedUnitSystem);
+      Lordaeron = new LegendLordaeron(_preplacedUnitSystem, artifactSetup);
       Naga = new LegendIllidan();
-      Quelthalas = new LegendQuelthalas(preplacedUnitSystem);
-      Scourge = new LegendScourge(preplacedUnitSystem);
-      Sentinels = new LegendSentinels(preplacedUnitSystem);
-      Stormwind = new LegendStormwind(preplacedUnitSystem);
+      Quelthalas = new LegendQuelthalas(_preplacedUnitSystem);
+      Scourge = new LegendScourge(_preplacedUnitSystem);
+      Sentinels = new LegendSentinels(_preplacedUnitSystem);
+      Stormwind = new LegendStormwind(_preplacedUnitSystem);
       Troll = new LegendTroll();
-      Warsong = new LegendWarsong(preplacedUnitSystem);
-      Neutral = new LegendNeutral(preplacedUnitSystem);
+      Warsong = new LegendWarsong(_preplacedUnitSystem);
+      Neutral = new LegendNeutral(_preplacedUnitSystem);
       Gilneas = new LegendGilneas();
       Cthun = new LegendCthun();
       Nazjatar = new LegendNazjatar();
-      BlackEmpire = new LegendBlackEmpire(preplacedUnitSystem);
+      BlackEmpire = new LegendBlackEmpire(_preplacedUnitSystem);
       Twilight = new LegendTwilight();
     }
 
     /// <summary>
     /// Registers all <see cref="Legend"/>s managed by the <see cref="AllLegendSetup"/>.
     /// </summary>
-    public void RegisterLegends(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Dalaran.RegisterLegends();
       Draenei.RegisterLegends();
@@ -149,7 +154,7 @@ namespace WarcraftLegacies.Source.Setup
       Lordaeron.RegisterLegends();
       Naga.RegisterLegends();
       Quelthalas.RegisterLegends();
-      Scourge.RegisterLegends(preplacedUnitSystem);
+      Scourge.RegisterLegends(_preplacedUnitSystem);
       Sentinels.RegisterLegends();
       Stormwind.RegisterLegends();
       Warsong.RegisterLegends();

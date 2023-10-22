@@ -16,7 +16,7 @@ namespace MacroTools.Setup
     /// </summary>
     /// <param name="singleton"></param>
     /// <typeparam name="T"></typeparam>
-    public void AddSingleton<T>(T singleton) where T : ISetupStep
+    public void Add<T>(T singleton) where T : ISetupStep
     {
       _services.Add(singleton.GetType(), singleton);
     }
@@ -24,12 +24,13 @@ namespace MacroTools.Setup
     /// <summary>
     /// Retrieves the registered singleton with the type <see cref="ISetupStep"/>.
     /// </summary>
-    public T GetRequiredSetupStep<T>() where T : class, ISetupStep
+    public T GetRequired<T>() where T : class, ISetupStep
     {
       return _services[typeof(T)] as T;
     }
 
     /// <summary>Returns all <see cref="ISetupStep"/>s in the collection.</summary>
-    public IList<ISetupStep> GetAllSetupSteps() => _services.Values.ToList();
+    public IList<IExecutableSetupStep> GetAllExecutableSetupSteps() =>
+      _services.Values.OfType<IExecutableSetupStep>().ToList();
   }
 }

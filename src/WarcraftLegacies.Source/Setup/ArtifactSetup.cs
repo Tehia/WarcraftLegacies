@@ -97,8 +97,10 @@ namespace WarcraftLegacies.Source.Setup
     /// <summary>
     /// Sets up <see cref="ArtifactSetup"/>.
     /// </summary>
-    public ArtifactSetup(PreplacedUnitSystem preplacedUnitSystem)
+    public ArtifactSetup(SetupStepCollection setupSteps)
     {
+      var preplacedUnitSystem = setupSteps.GetRequired<PreplacedUnitSystem>();
+      
       CrownOfStormwind = new Artifact(CreateItem(FourCC("I002"), DummyX, DummyY));
       UnitAddItem(preplacedUnitSystem.GetUnit(FourCC("n021")), CrownOfStormwind.Item); //Hogger
       ArtifactManager.Register(CrownOfStormwind);
