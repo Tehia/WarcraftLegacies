@@ -17,10 +17,7 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-    
-    public void Execute()
-    {
+      
       Frostwolf = new Faction("Frostwolf", PLAYER_COLOR_RED, "|c00ff0303",
         @"ReplaceableTextures\CommandButtons\BTNThrall.blp")
       {
@@ -36,7 +33,10 @@ You begin in the Salt Flats, separated from your ally, the Warsong Clan in the N
 Salvage the wrecked ships, establish a base and gather your troops to move inland and assist your ally against the Night Elf threat."
 
       };
-
+    }
+    
+    public void Execute()
+    {
       Frostwolf.ModObjectLimit(Constants.UNIT_OGRE_GREAT_HALL_FROSTWOLF_T1, Faction.UNLIMITED);
       Frostwolf.ModObjectLimit(Constants.UNIT_OSTR_STRONGHOLD_FROSTWOLF_T2, Faction.UNLIMITED);
       Frostwolf.ModObjectLimit(Constants.UNIT_OFRT_FORTRESS_FROSTWOLF_T3, Faction.UNLIMITED);

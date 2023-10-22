@@ -11,16 +11,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Lordaeron { get; private set; }
+    public Faction Lordaeron { get; }
     
     public LordaeronSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-
-    public void Execute()
-    {
+      
       Lordaeron = new Faction("Lordaeron", PLAYER_COLOR_LIGHT_BLUE, "|cff8080ff",
         @"ReplaceableTextures\CommandButtons\BTNArthas.blp")
       {
@@ -38,6 +35,10 @@ Secure your major settlements by clearing out clusters of enemies and fortify yo
 If you survive the Plague, sail to the frozen wasteland of Northrend and take the fight to the Lich King."
       };
 
+    }
+
+    public void Execute()
+    {
       //Structures
       Lordaeron.ModObjectLimit(FourCC("htow"), Faction.UNLIMITED); //Town Hall
       Lordaeron.ModObjectLimit(FourCC("hkee"), Faction.UNLIMITED); //Keep

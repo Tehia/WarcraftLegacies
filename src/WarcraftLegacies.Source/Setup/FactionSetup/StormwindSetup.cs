@@ -11,15 +11,12 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   {
     private readonly FactionManager _factionManager;
     
-    public Faction Stormwind { get; private set; }
+    public Faction Stormwind { get; }
     
     public StormwindSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
-    }
-    
-    public void Execute()
-    {
+      
       Stormwind = new Faction("Stormwind", PLAYER_COLOR_BLUE, "|c000042ff",
         @"ReplaceableTextures\CommandButtons\BTNKnight.blp")
       {
@@ -35,7 +32,10 @@ Once you have unified Stormwind's forces, race East to the Nethergarde Stronghol
 
 Make sure to communicate with your Dwarven and Kul'tiran allies, as they will be key in helping you defeat the evil from beyond the Dark Portal."
       };
-
+    }
+    
+    public void Execute()
+    {
       //Structures
       Stormwind.ModObjectLimit(FourCC("h06K"), Faction.UNLIMITED); //Town Hall
       Stormwind.ModObjectLimit(FourCC("h06M"), Faction.UNLIMITED); //Keep

@@ -11,16 +11,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction WarsongClan { get; private set; }
+    public Faction WarsongClan { get; }
     
     public WarsongSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-    
-    public void Execute()
-    {
+      
       WarsongClan = new Faction("Warsong", PLAYER_COLOR_ORANGE, "|c00ff8000",
         @"ReplaceableTextures\CommandButtons\BTNHellScream.blp")
       {
@@ -38,6 +35,10 @@ The Warchief expects a large amount of lumber from you. Begin by harvesting with
 The Night Elves are aware of your presence and are gathering a mighty host against you. Unlock Orgrimmar as soon as possible to defend against the Night Elf assault."
       };
 
+    }
+    
+    public void Execute()
+    {
       WarsongClan.ModObjectLimit(FourCC("o00C"), Faction.UNLIMITED); //Great Hall
       WarsongClan.ModObjectLimit(FourCC("o02R"), Faction.UNLIMITED); //Stronghold
       WarsongClan.ModObjectLimit(FourCC("o02S"), Faction.UNLIMITED); //Fortress

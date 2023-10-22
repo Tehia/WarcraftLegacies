@@ -11,16 +11,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Legion { get; private set; }
+    public Faction Legion { get; }
     
     public LegionSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-    
-    public void Execute()
-    {
+      
       Legion = new Faction("Legion", PLAYER_COLOR_PEANUT, "|CFFBF8F4F",
         @"ReplaceableTextures\CommandButtons\BTNKiljaedin.blp")
       {
@@ -39,7 +36,11 @@ On Azeroth, the Scourge will need your assistance to destroy the Kingdoms of Lor
 
 Your primary objective is to summon the great host of the Burning Legion. Invade the city of Dalaran, where the book of Medivh is kept, and use it to open the Demon-gate to Argus."
       };
-      
+
+    }
+    
+    public void Execute()
+    {
       //Structures
       Legion.ModObjectLimit(FourCC("u00H"), Faction.UNLIMITED); //Legion Defensive Pylon
       Legion.ModObjectLimit(FourCC("u00I"), Faction.UNLIMITED); //Improved Defensive Pylon

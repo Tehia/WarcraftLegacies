@@ -9,15 +9,12 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   {
     private readonly FactionManager _factionManager;
     
-    public Faction Illidari { get; private set; }
+    public Faction Illidari { get; }
     
     public IllidariSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
-    }
-    
-    public void Execute()
-    {
+      
       Illidari = new Faction("Illidan", PLAYER_COLOR_VIOLET, "|cffff00ff",
         @"ReplaceableTextures\CommandButtons\BTNEvilIllidan.blp")
       {
@@ -37,6 +34,10 @@ Unfortunately, you cannot progress further in the Islands. Use Illidan's mastery
 Support your ally in Outland by unlocking bases and coordinating with his push out of the Dark Portal."
       };
 
+    }
+    
+    public void Execute()
+    {
       Illidari.ModObjectLimit(FourCC("nntt"), Faction.UNLIMITED); //Pillar of Waves
       Illidari.ModObjectLimit(FourCC("n04T"), Faction.UNLIMITED); //Monument of Currents
       Illidari.ModObjectLimit(FourCC("n055"), Faction.UNLIMITED); //Temple of Tides

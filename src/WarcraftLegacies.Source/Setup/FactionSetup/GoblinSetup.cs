@@ -16,16 +16,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Goblin { get; private set; }
+    public Faction Goblin { get; }
     
     public GoblinSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-
-    public void Execute()
-    {
+      
       Goblin = new Faction("Bilgewater", PLAYER_COLOR_LIGHT_GRAY, "|cff808080",
         @"ReplaceableTextures\CommandButtons\BTNHeroTinker.blp")
       {
@@ -41,7 +38,10 @@ Your advanced units require Oil to function. Use oil ships to find oil deposits 
 
 The Trading Center in Kezan will unlock the ability to train Traders. Be sure to protect the Trading Center once you unlock it, as it will form the backbone of your Goblin Empire."
       };
+    }
 
+    public void Execute()
+    {
       Goblin.ModObjectLimit(FourCC("o03L"), Faction.UNLIMITED); //Great Hall
       Goblin.ModObjectLimit(FourCC("o03M"), Faction.UNLIMITED); //Stronghold
       Goblin.ModObjectLimit(FourCC("o03N"), Faction.UNLIMITED); //Fortress

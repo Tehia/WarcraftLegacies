@@ -12,16 +12,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction FelHorde { get; private set; }
+    public Faction FelHorde { get; }
     
     public FelHordeSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-
-    public void Execute()
-    {
+      
       FelHorde = new Faction("Fel Horde", PLAYER_COLOR_GREEN, "|c0020c000",
         @"ReplaceableTextures\CommandButtons\BTNPitLord.blp")
       {
@@ -39,7 +36,10 @@ Once Outland is under your control, gather your hordes and prepare to invade Aze
 The Alliance is gathering outside the Dark Portal to stop you, so prepare to for a very hard breakout.",
         FoodMaximum = 250
       };
+    }
 
+    public void Execute()
+    {
       FelHorde.ModObjectLimit(FourCC("o02Y"), Faction.UNLIMITED); //Great Hall
       FelHorde.ModObjectLimit(FourCC("o02Z"), Faction.UNLIMITED); //Stronghold
       FelHorde.ModObjectLimit(FourCC("o030"), Faction.UNLIMITED); //Fortress

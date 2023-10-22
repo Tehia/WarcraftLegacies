@@ -9,15 +9,12 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   {
     private readonly FactionManager _factionManager;
     
-    public Faction Draenei { get; private set; }
+    public Faction Draenei { get; }
     
     public DraeneiSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
-    }
-
-    public void Execute()
-    {
+      
       Draenei = new Faction("The Exodar", PLAYER_COLOR_NAVY, "|cff000080",
         @"ReplaceableTextures\CommandButtons\BTNBOSSVelen.blp")
       {
@@ -32,7 +29,10 @@ Further inland your Night-elf allies will need your help against the Orcish Hord
 
 The Exodar is a mighty fortress-base with the ability to move around the map, but it will take a long time to repair."
       };
+    }
 
+    public void Execute()
+    {
       Draenei.ModObjectLimit(FourCC("o02P"), Faction.UNLIMITED); //Crystal Hall
       Draenei.ModObjectLimit(FourCC("o050"), Faction.UNLIMITED); //Metropolis
       Draenei.ModObjectLimit(FourCC("o051"), Faction.UNLIMITED); //Divine Citadel

@@ -14,16 +14,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Ironforge { get; private set; }
+    public Faction Ironforge { get; }
     
     public IronforgeSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-    
-    public void Execute()
-    {
+      
       Ironforge = new Faction("Ironforge", PLAYER_COLOR_YELLOW, "|C00FFFC01",
         @"ReplaceableTextures\CommandButtons\BTNHeroMountainKing.blp")
       {
@@ -38,7 +35,10 @@ You begin in the Wetlands, separated from the rest of your forces. Conquer Loch 
  
 Stormwind is preparing for an invasion through the Dark Portal in the South. Muster the throng and help them, or you may lose your strongest ally."
       };
-
+    }
+    
+    public void Execute()
+    {
       //Structures
       Ironforge.ModObjectLimit(FourCC("h07E"), Faction.UNLIMITED); //Town Hall
       Ironforge.ModObjectLimit(FourCC("h07F"), Faction.UNLIMITED); //Keep

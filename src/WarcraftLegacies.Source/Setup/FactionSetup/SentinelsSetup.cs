@@ -16,17 +16,14 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
     private readonly AllLegendSetup _allLegendSetup;
 
-    public Faction Sentinels { get; private set; }
+    public Faction Sentinels { get; }
     
     public SentinelsSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
       _allLegendSetup = services.GetRequired<AllLegendSetup>();
-    }
-
-    public void Execute()
-    {
+      
       Sentinels = new Faction("Sentinels", PLAYER_COLOR_MINT, "|CFFBFFF80",
         @"ReplaceableTextures\CommandButtons\BTNPriestessOfTheMoon.blp")
       {
@@ -44,6 +41,10 @@ Your first mission is to race down the coast to Feathermoon Stronghold, a powerf
 Once you have secured your holdings, gather your army and destroy the Orcish Horde. Be careful, they will outnumber you if given time to unite the clans."
       };
 
+    }
+
+    public void Execute()
+    {
       Sentinels.ModObjectLimit(FourCC("e00V"), Faction.UNLIMITED); //Temple of Elune
       Sentinels.ModObjectLimit(FourCC("e00R"), Faction.UNLIMITED); //Altar of Watchers
       Sentinels.ModObjectLimit(FourCC("e00L"), Faction.UNLIMITED); //War Academy

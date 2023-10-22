@@ -15,17 +15,14 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
     private readonly AllLegendSetup _allLegendSetup;
 
-    public Faction Druids { get; private set; }
+    public Faction Druids { get; }
     
     public DruidsSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
       _allLegendSetup = services.GetRequired<AllLegendSetup>();
-    }
-
-    public void Execute()
-    {
+      
       Druids = new Faction("Druids", PLAYER_COLOR_BROWN, "|c004e2a04",
         @"ReplaceableTextures\CommandButtons\BTNFurion.blp")
       {
@@ -45,7 +42,10 @@ Once awakened, use his Force of Nature to clear a path through the trees in Ashe
 
 Gather your forces and strike before the Horde can organize their efforts."
       };
+    }
 
+    public void Execute()
+    {
       Druids.ModObjectLimit(FourCC("etol"), Faction.UNLIMITED); //Tree of Life
       Druids.ModObjectLimit(FourCC("etoa"), Faction.UNLIMITED); //Tree of Ages
       Druids.ModObjectLimit(FourCC("etoe"), Faction.UNLIMITED); //Tree of Eternity

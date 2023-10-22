@@ -12,16 +12,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Dalaran { get; private set; }
+    public Faction Dalaran { get; }
     
     public DalaranSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-
-    public void Execute()
-    {
+      
       Dalaran = new Faction("Dalaran", PLAYER_COLOR_PINK, "|c00e55bb0",
         @"ReplaceableTextures\CommandButtons\BTNJaina.blp")
       {
@@ -40,7 +37,10 @@ Once your territory is secured, you will need to prepare for the Plague of Undea
 
 Your mages are the finest in Azeroth, be sure to utilize them alongside your heroes to turn the tide of battle."
       };
+    }
 
+    public void Execute()
+    {
       //Structures
       Dalaran.ModObjectLimit(FourCC("h065"), Faction.UNLIMITED); //Refuge
       Dalaran.ModObjectLimit(FourCC("h066"), Faction.UNLIMITED); //Conclave

@@ -12,16 +12,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Gilneas { get; private set; }
+    public Faction Gilneas { get; }
     
     public GilneasSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-    
-    public void Execute()
-    {
+      
       Gilneas = new Faction("Gilneas", PLAYER_COLOR_COAL, "|cff808080",
         @"ReplaceableTextures\CommandButtons\BTNGreymane.blp")
       {
@@ -38,7 +35,10 @@ You must raise an army and fight back against the feral wolves and worgen that h
 
 Once you have reclaimed Gilneas, open Greymane's Gate and march North to assist Lordaeron and Dalaran with the plague, if it's not too late."
       };
-
+    }
+    
+    public void Execute()
+    {
       //Structures
       Gilneas.ModObjectLimit(FourCC("h01R"), Faction.UNLIMITED); //Town Hall
       Gilneas.ModObjectLimit(FourCC("h023"), Faction.UNLIMITED); //Keep

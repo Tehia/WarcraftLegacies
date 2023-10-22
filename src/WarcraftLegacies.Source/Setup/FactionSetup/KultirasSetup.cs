@@ -11,16 +11,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Kultiras { get; private set; }
+    public Faction Kultiras { get; }
     
     public KultirasSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-
-    public void Execute()
-    {
+      
       Kultiras =
         new Faction("Kul'tiras", PLAYER_COLOR_EMERALD, "|cff00781e", @"ReplaceableTextures\CommandButtons\BTNProudmoore.blp")
         {
@@ -34,6 +31,10 @@ You begin on Balor island, separated from your main forces in Kul Tiras. Unite y
 Stormwind is preparing for an invasion through the Dark Portal in the South. Muster the Admiralty and help them, or you may lose your strongest ally."
         };
 
+    }
+
+    public void Execute()
+    {
       //Structures
       Kultiras.ModObjectLimit(FourCC("h062"), Faction.UNLIMITED); //Town Hall
       Kultiras.ModObjectLimit(FourCC("h064"), Faction.UNLIMITED); //Keep

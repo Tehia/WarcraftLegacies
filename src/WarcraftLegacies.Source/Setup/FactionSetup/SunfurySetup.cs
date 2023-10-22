@@ -12,18 +12,15 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Sunfury { get; private set; }
+    public Faction Sunfury { get; }
     
     public SunfurySetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-    
-    public void Execute()
-    {
+      
       Sunfury = new Faction("Sunfury", PLAYER_COLOR_MAROON, "|cffff0000",
-          @"ReplaceableTextures\CommandButtons\BTNBloodMage2.blp")
+        @"ReplaceableTextures\CommandButtons\BTNBloodMage2.blp")
       {
         StartingGold = 200,
         StartingLumber = 700,
@@ -39,7 +36,10 @@ Unite with your fel ally to push through the Dark Portal and destroy Stormwind.
 
 Your main goal is to summon Kil'jaeden and destroy your enemies."
       };
-
+    }
+    
+    public void Execute()
+    {
       //Structures
       Sunfury.ModObjectLimit(FourCC("h02P"), Faction.UNLIMITED); //t1
       Sunfury.ModObjectLimit(FourCC("h0C4"), Faction.UNLIMITED); //t2

@@ -11,16 +11,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public Faction Quelthalas { get; private set; }
+    public Faction Quelthalas { get; }
 
     public QuelthalasSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-    
-    public void Execute()
-    {
+      
       Quelthalas = new Faction("Quel'thalas", PLAYER_COLOR_CYAN, "|C0000FFFF",
         @"ReplaceableTextures\CommandButtons\BTNSylvanusWindrunner.blp")
       {
@@ -39,6 +36,10 @@ Train soldiers to repel the attacks, then gather enough strength to besiege Zul'
 The Plague of Undeath is coming and Lordaeron will need your help with the Scourge soon. Be ready to join them as once you have secured Silvermoon and dealt with the Amani invasion."
       };
 
+    }
+    
+    public void Execute()
+    {
       //Structures
       Quelthalas.ModObjectLimit(FourCC("h033"), Faction.UNLIMITED); //Steading
       Quelthalas.ModObjectLimit(FourCC("h03S"), Faction.UNLIMITED); //Mansion
