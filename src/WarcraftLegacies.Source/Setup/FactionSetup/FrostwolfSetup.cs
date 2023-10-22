@@ -11,7 +11,7 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
-    public static Faction? Frostwolf { get; private set; }
+    public Faction Frostwolf { get; }
     
     public FrostwolfSetup(ServiceCollection services)
     {
