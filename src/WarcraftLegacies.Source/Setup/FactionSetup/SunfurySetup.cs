@@ -12,14 +12,14 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
+    public Faction Sunfury { get; private set; }
+    
     public SunfurySetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
-
-    public static Faction? Sunfury { get; private set; }
-
+    
     public void Execute()
     {
       Sunfury = new Faction("Sunfury", PLAYER_COLOR_MAROON, "|cffff0000",

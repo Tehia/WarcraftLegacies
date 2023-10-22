@@ -15,14 +15,14 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
     private readonly AllLegendSetup _allLegendSetup;
 
+    public Faction Druids { get; private set; }
+    
     public DruidsSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
       _allLegendSetup = services.GetRequired<AllLegendSetup>();
     }
-
-    public static Faction? Druids { get; private set; }
 
     public void Execute()
     {

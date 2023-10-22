@@ -12,13 +12,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
+    public Faction Gilneas { get; private set; }
+    
     public GilneasSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
-
-    public static Faction? Gilneas { get; private set; }
     
     public void Execute()
     {

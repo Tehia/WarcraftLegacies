@@ -7,18 +7,18 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public sealed class DalaranSetup : IService
+  public sealed class DalaranSetup : IExecutableService
   {
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
+    public Faction Dalaran { get; private set; }
+    
     public DalaranSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
-
-    public static Faction? Dalaran { get; private set; }
 
     public void Execute()
     {

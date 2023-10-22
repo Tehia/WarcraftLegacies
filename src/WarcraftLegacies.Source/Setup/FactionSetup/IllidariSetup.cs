@@ -9,12 +9,12 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   {
     private readonly FactionManager _factionManager;
     
+    public Faction Illidari { get; private set; }
+    
     public IllidariSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
     }
-
-    public static Faction? Illidari { get; private set; }
     
     public void Execute()
     {

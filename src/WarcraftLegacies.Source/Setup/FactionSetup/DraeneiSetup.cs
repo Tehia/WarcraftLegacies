@@ -5,16 +5,16 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public sealed class DraeneiSetup : IService
+  public sealed class DraeneiSetup : IExecutableService
   {
     private readonly FactionManager _factionManager;
+    
+    public Faction Draenei { get; private set; }
     
     public DraeneiSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
     }
-
-    public static Faction? Draenei { get; private set; }
 
     public void Execute()
     {

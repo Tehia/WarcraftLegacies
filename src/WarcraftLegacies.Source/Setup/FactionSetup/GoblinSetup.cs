@@ -16,13 +16,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
+    public Faction Goblin { get; private set; }
+    
     public GoblinSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
-
-    public static Faction Goblin { get; private set; }
 
     public void Execute()
     {

@@ -11,13 +11,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
+    public Faction Legion { get; private set; }
+    
     public LegionSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
-
-    public static Faction? Legion { get; private set; }
     
     public void Execute()
     {

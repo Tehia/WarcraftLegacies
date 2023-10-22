@@ -11,14 +11,14 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
+    public Faction WarsongClan { get; private set; }
+    
     public WarsongSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
-
-    public static Faction? WarsongClan { get; private set; }
-
+    
     public void Execute()
     {
       WarsongClan = new Faction("Warsong", PLAYER_COLOR_ORANGE, "|c00ff8000",

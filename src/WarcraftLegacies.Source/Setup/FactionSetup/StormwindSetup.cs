@@ -11,13 +11,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   {
     private readonly FactionManager _factionManager;
     
+    public Faction Stormwind { get; private set; }
+    
     public StormwindSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
     }
-
-    public static Faction? Stormwind { get; private set; }
-
+    
     public void Execute()
     {
       Stormwind = new Faction("Stormwind", PLAYER_COLOR_BLUE, "|c000042ff",

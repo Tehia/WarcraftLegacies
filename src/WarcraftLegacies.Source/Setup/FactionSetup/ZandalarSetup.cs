@@ -12,16 +12,13 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
+    public Faction Zandalar { get; }
+    
     public ZandalarSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
-    }
-
-    public static Faction Zandalar { get; private set; }
-
-    public void Execute()
-    {
+      
       Zandalar = new Faction("Zandalar", PLAYER_COLOR_PEACH, "|cffff8c6c",
         @"ReplaceableTextures\CommandButtons\BTNHeadHunterBerserker.blp")
       {
@@ -38,7 +35,10 @@ The Night Elves are mounting an assault on you and your allies from the North.
 
 Join up with your allies and brace for a tough fight and counter-attack. "
       };
-
+    }
+    
+    public void Execute()
+    {
       Zandalar.ModObjectLimit(FourCC("o03R"), Faction.UNLIMITED); //Great Hall
       Zandalar.ModObjectLimit(FourCC("o03Y"), Faction.UNLIMITED); //Stronghold
       Zandalar.ModObjectLimit(FourCC("o03Z"), Faction.UNLIMITED); //Fortress

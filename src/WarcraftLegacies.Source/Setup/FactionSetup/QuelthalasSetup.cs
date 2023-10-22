@@ -11,18 +11,18 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
     private readonly FactionManager _factionManager;
     private readonly PreplacedUnitSystem _preplacedUnitSystem;
 
+    public Faction Quelthalas { get; private set; }
+
     public QuelthalasSetup(ServiceCollection services)
     {
       _factionManager = services.GetRequired<FactionManager>();
       _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
-
-    public static Faction? Quelthalas { get; private set; }
-
+    
     public void Execute()
     {
       Quelthalas = new Faction("Quel'thalas", PLAYER_COLOR_CYAN, "|C0000FFFF",
-          @"ReplaceableTextures\CommandButtons\BTNSylvanusWindrunner.blp")
+        @"ReplaceableTextures\CommandButtons\BTNSylvanusWindrunner.blp")
       {
         UndefeatedResearch = FourCC("R05U"),
         StartingGold = 200,
