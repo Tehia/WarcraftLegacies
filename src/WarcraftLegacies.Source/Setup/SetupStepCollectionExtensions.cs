@@ -57,10 +57,6 @@ namespace WarcraftLegacies.Source.Setup
       services.Add(new ZandalarSetup(services));
       services.Add(new SunfurySetup(services));
       services.Add(new GilneasSetup(services));
-      services.Add(new CthunSetup(services));
-      services.Add(new NazjatarSetup(services));
-      services.Add(new BlackEmpireSetup(services));
-      services.Add(new TwilightHammerSetup(services));
     }
   }
 }
