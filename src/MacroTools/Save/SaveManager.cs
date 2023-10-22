@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MacroTools.Extensions;
+using MacroTools.Setup;
 using static War3Api.Common;
 using WCSharp.SaveLoad;
 using WCSharp.Shared;
@@ -10,12 +11,13 @@ namespace MacroTools.Save
   /// <summary>
   /// Manager class for saving and loading player settings.
   /// </summary>
-  public static class SaveManager
+  public sealed class SaveManager : ISetupStep
   {
     public static Dictionary<player, PlayerSettings> SavesByPlayer { get; } = new();
     private static SaveSystem<PlayerSettings>? _saveSystem;
 	
-    public static void Initialize()
+    /// <inheritdoc />
+    public void Execute()
     {
       _saveSystem = new SaveSystem<PlayerSettings>(new SaveSystemOptions
       {
@@ -34,7 +36,7 @@ namespace MacroTools.Save
       }
     }
 
-    private static void SaveManager_OnSaveLoaded(PlayerSettings save, LoadResult loadResult)
+    private void SaveManager_OnSaveLoaded(PlayerSettings save, LoadResult loadResult)
     {
       SavesByPlayer[save.GetPlayer()] = save;
         
@@ -63,7 +65,7 @@ namespace MacroTools.Save
     /// Saves the player settings for the given player.
     /// </summary>
     /// <param name="save"></param>
-    public static void Save(PlayerSettings save)
+    public void Save(PlayerSettings save)
     {
       _saveSystem?.Save(save);
     }

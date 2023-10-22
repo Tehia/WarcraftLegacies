@@ -1,10 +1,9 @@
 ﻿using MacroTools;
 using MacroTools.CommandSystem;
-using MacroTools.ControlPointSystem;
 using MacroTools.GameModes;
 using MacroTools.Mechanics;
 using MacroTools.PassiveAbilitySystem;
-using MacroTools.Save;
+using MacroTools.Setup;
 using MacroTools.UserInterface;
 using WarcraftLegacies.Source.ArtifactBehaviour;
 using WarcraftLegacies.Source.GameLogic;
@@ -23,27 +22,39 @@ namespace WarcraftLegacies.Source.Setup
   /// <summary>
   /// Responsible for setting up the entire game.
   /// </summary>
-  public static class GameSetup
+  public sealed class GameSetup
   {
+    private readonly SetupStepCollection _setupSteps = new();
+    
+    public void ConfigureSetupSteps()
+    {
+      _setupSteps.ConfigureSaveManager();
+      _setupSteps.ConfigureControlPointManager();
+      _setupSteps.AddSingleton(new PreplacedUnitSystem());
+      _setupSteps.AddSingleton(new ArtifactSetup(_setupSteps));
+      _setupSteps.AddSingleton(new AllLegendSetup());
+      _setupSteps.AddSingleton(new TeamSetup());
+      _setupSteps.AddSingleton(new AllFactionSetup());
+    }
+
+    public void ExecuteSetupSteps()
+    {
+      _setupSteps.GetRequiredSetupStep<AllLegendSetup>().RegisterLegends();
+      _setupSteps.GetRequiredSetupStep<TeamSetup>().RegisterTeams();
+      _setupSteps.GetRequiredSetupStep<AllFactionSetup>().RegisterFactions();
+    }
+    
     /// <summary>
     /// Initialize the entire game.
     /// </summary>
-    public static void Setup()
+    public void StartGame()
     {
-      SaveManager.Initialize();
       DisplayIntroText.Setup(25);
       CinematicMode.Setup(59);
-      SetupControlPointManager();
-      var preplacedUnitSystem = new PreplacedUnitSystem();
       SoundLibrary.Setup();
-      var artifactSetup = new ArtifactSetup(preplacedUnitSystem);
-      var allLegendSetup = new AllLegendSetup(preplacedUnitSystem, artifactSetup);
-      allLegendSetup.RegisterLegends(preplacedUnitSystem);
       ShoreSetup.Setup();
       ControlPointSetup.Setup();
       InstanceSetup.Setup(preplacedUnitSystem);
-      TeamSetup.Setup();
-      AllFactionSetup.Setup(preplacedUnitSystem, artifactSetup, allLegendSetup);
       SharedFactionConfigSetup.Setup();
       PlayerSetup.Setup();
       new FactionChoiceDialogPresenter(GoblinSetup.Goblin, ZandalarSetup.Zandalar).Run(Player(8));
@@ -111,27 +122,6 @@ namespace WarcraftLegacies.Source.Setup
       CenariusGhost.Setup(allLegendSetup.Druids);
       HelmOfDominationDropsWhenScourgeLeaves.Setup(artifactSetup.HelmOfDomination, allLegendSetup.Scourge.TheFrozenThrone);
       TagSummonedUnits.Setup();
-    }
-
-    private static void SetupControlPointManager()
-    {
-      ControlPointManager.Instance = new ControlPointManager
-      {
-        StartingMaxHitPoints = 1900,
-        HostileStartingCurrentHitPoints = 1000,
-        RegenerationAbility = Constants.ABILITY_A0UT_CP_LIFE_REGEN,
-        PiercingResistanceAbility = Constants.ABILITY_A13X_MAGIC_RESISTANCE_CONTROL_POINT_TOWER,
-        IncreaseControlLevelAbilityTypeId = Constants.ABILITY_A0A8_FORTIFY_CONTROL_POINTS_SHARED,
-        ControlLevelSettings = new ControlLevelSettings
-        {
-          DefaultDefenderUnitTypeId = Constants.UNIT_H03W_CONTROL_POINT_DEFENDER_LORDAERON,
-          DamageBase = 8,
-          DamagePerControlLevel = 1,
-          ArmorPerControlLevel = 1,
-          HitPointsPerControlLevel = 70,
-          ControlLevelMaximum = 30
-        }
-      };
     }
   }
 }

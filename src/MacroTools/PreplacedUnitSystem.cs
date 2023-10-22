@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MacroTools.Extensions;
 using MacroTools.Libraries;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
@@ -13,7 +14,7 @@ namespace MacroTools
   ///   Once initialized, the system contains a reference to all preplaced units on the map.
   ///   Shutdown should be called once game has finished initializing.
   /// </summary>
-  public sealed class PreplacedUnitSystem
+  public sealed class PreplacedUnitSystem : ISetupStep
   {
     private readonly Dictionary<int, List<unit>> _unitsByTypeId = new();
     private readonly Dictionary<int, List<destructable>> _destructablesByTypeId = new();

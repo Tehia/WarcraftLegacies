@@ -1,8 +1,9 @@
 ﻿using MacroTools.FactionSystem;
+using MacroTools.Setup;
 
 namespace WarcraftLegacies.Source.Setup
 {
-  public static class TeamSetup{
+  public sealed class TeamSetup : ISetupStep{
     public static Team Legion { get; private set; }
     public static Team Alliance { get; private set; }
     public static Team NorthAlliance { get; private set; }

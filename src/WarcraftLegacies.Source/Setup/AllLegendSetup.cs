@@ -1,5 +1,6 @@
 ﻿using MacroTools;
 using MacroTools.LegendSystem;
+using MacroTools.Setup;
 using WarcraftLegacies.Source.Setup.Legends;
 
 namespace WarcraftLegacies.Source.Setup
@@ -7,7 +8,7 @@ namespace WarcraftLegacies.Source.Setup
   /// <summary>
   /// Initializes and maintains references to all <see cref="Legend"/>s.
   /// </summary>
-  public sealed class AllLegendSetup
+  public sealed class AllLegendSetup : ISetupStep
   {
     /// <summary>
     /// Contains references to all Dalaran <see cref="Legend"/>s.

@@ -1,9 +1,10 @@
 ﻿using MacroTools;
+using MacroTools.Setup;
 using WarcraftLegacies.Source.Setup.FactionSetup;
 
 namespace WarcraftLegacies.Source.Setup
 {
-  public static class AllFactionSetup
+  public static class AllFactionSetup : ISetupStep
   {
     public static void Setup(PreplacedUnitSystem preplacedUnitSystem, ArtifactSetup artifactSetup, AllLegendSetup allLegendSetup)
     {

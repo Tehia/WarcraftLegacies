@@ -1,5 +1,6 @@
 ﻿using MacroTools;
 using MacroTools.ArtifactSystem;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
@@ -8,7 +9,7 @@ namespace WarcraftLegacies.Source.Setup
   /// <summary>
   /// Responsible for setting up and storing all <see cref="Artifact"/>s.
   /// </summary>
-  public sealed class ArtifactSetup
+  public sealed class ArtifactSetup : ISetupStep
   {
     private const float DummyX = 20195;
     private const float DummyY = 24177;

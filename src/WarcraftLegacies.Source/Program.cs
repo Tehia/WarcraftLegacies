@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using MacroTools;
+using MacroTools.Setup;
 using WarcraftLegacies.Source.Setup;
 
 using static War3Api.Common;
@@ -24,8 +25,11 @@ namespace WarcraftLegacies.Source
 		private static void Start()
 		{
 			try
-			{
-        GameSetup.Setup();
+      {
+        var gameSetup = new GameSetup();
+        gameSetup.ConfigureSetupSteps();
+        gameSetup.ExecuteSetupSteps();
+        gameSetup.StartGame();
       }
 			catch (Exception ex)
 			{
