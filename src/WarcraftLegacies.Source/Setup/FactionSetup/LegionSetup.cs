@@ -6,16 +6,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class LegionSetup : IService
+  public sealed class LegionSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public LegionSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Legion { get; private set; }
     
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Legion = new Faction("Legion", PLAYER_COLOR_PEANUT, "|CFFBF8F4F",
         @"ReplaceableTextures\CommandButtons\BTNKiljaedin.blp")
@@ -104,9 +108,9 @@ Your primary objective is to summon the great host of the Burning Legion. Invade
       Legion.ModObjectLimit(Constants.UNIT_UMAL_THE_CUNNING_LEGION, 1);
       Legion.ModObjectLimit(Constants.UNIT_UTIC_THE_DARKENER_LEGION, 1);
 
-      Legion.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(19331f, -30663)));
+      Legion.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(19331f, -30663)));
       
-      FactionManager.Register(Legion);
+      _factionManager.Register(Legion);
     }
   }
 }

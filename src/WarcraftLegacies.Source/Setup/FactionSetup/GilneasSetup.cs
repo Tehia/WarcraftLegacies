@@ -7,16 +7,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class GilneasSetup : IService
+  public sealed class GilneasSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public GilneasSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Gilneas { get; private set; }
     
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Gilneas = new Faction("Gilneas", PLAYER_COLOR_COAL, "|cff808080",
         @"ReplaceableTextures\CommandButtons\BTNGreymane.blp")
@@ -90,13 +94,13 @@ Once you have reclaimed Gilneas, open Greymane's Gate and march North to assist 
       Gilneas.ModObjectLimit(FourCC("R09L"), Faction.UNLIMITED); //Worgen Shaman training
       Gilneas.ModObjectLimit(FourCC("R09M"), Faction.UNLIMITED); //harvestWitch training
 
-      Gilneas.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(4236, 1321)));
-      Gilneas.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(4477, -1449)));
-      Gilneas.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(7709, -2853)));
-      Gilneas.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(9392, -921)));
+      Gilneas.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(4236, 1321)));
+      Gilneas.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(4477, -1449)));
+      Gilneas.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(7709, -2853)));
+      Gilneas.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(9392, -921)));
 
 
-      FactionManager.Register(Gilneas);
+      _factionManager.Register(Gilneas);
     }
   }
 }

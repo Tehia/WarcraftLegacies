@@ -15,7 +15,7 @@ namespace TestMap.Source.Setup.FactionSetup.FactionSetup
         StartingGold = 150,
         StartingLumber = 500
       };
-      FactionManager.Register(Draenei);
+      _factionManager.Register(Draenei);
     }
   }
 }

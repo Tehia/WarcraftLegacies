@@ -24,79 +24,79 @@ namespace WarcraftLegacies.Source.Setup
       {
         VictoryMusic = "HeroicVictory"
       };
-      FactionManager.Register(Alliance);
+      _factionManager.Register(Alliance);
 
       NorthAlliance = new Team("North Alliance")
       {
         VictoryMusic = "HeroicVictory"
       };
-      FactionManager.Register(NorthAlliance);
+      _factionManager.Register(NorthAlliance);
 
       SouthAlliance = new Team("South Alliance")
       {
         VictoryMusic = "HeroicVictory"
       };
-      FactionManager.Register(SouthAlliance);
+      _factionManager.Register(SouthAlliance);
 
       Legion = new Team("Burning Legion")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(Legion);
+      _factionManager.Register(Legion);
 
       Horde = new Team("Horde")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(Horde);
+      _factionManager.Register(Horde);
       
       NightElves = new Team("Night Elves")
       {
         VictoryMusic = "HeroicVictory"
       };
-      FactionManager.Register(NightElves);
+      _factionManager.Register(NightElves);
 
       Outland = new Team("Outland")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(Outland);
+      _factionManager.Register(Outland);
       
       Gilneas = new Team("Gilneas")
       {
         VictoryMusic = "HeroicVictory"
       };
-      FactionManager.Register(Gilneas);
+      _factionManager.Register(Gilneas);
       
       ScarletCrusade = new Team("Scarlet Crusade")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(ScarletCrusade);
+      _factionManager.Register(ScarletCrusade);
       
       Scourge = new Team("Northrend")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(Scourge);
+      _factionManager.Register(Scourge);
 
       Crisis = new Team("Crisis")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(Crisis);
+      _factionManager.Register(Crisis);
 
       Oldgods = new Team("Old Gods")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(Oldgods);
+      _factionManager.Register(Oldgods);
 
       Draenei = new Team("Draenei")
       {
         VictoryMusic = "HeroicVictory"
       };
-      FactionManager.Register(Draenei);
+      _factionManager.Register(Draenei);
     }
 
   }

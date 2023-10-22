@@ -5,16 +5,18 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class DraeneiSetup : IService
+  public sealed class DraeneiSetup : IService
   {
+    private readonly FactionManager _factionManager;
+    
     public DraeneiSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
     }
 
     public static Faction? Draenei { get; private set; }
 
-    public static void Setup()
+    public void Execute()
     {
       Draenei = new Faction("The Exodar", PLAYER_COLOR_NAVY, "|cff000080",
         @"ReplaceableTextures\CommandButtons\BTNBOSSVelen.blp")
@@ -85,7 +87,7 @@ The Exodar is a mighty fortress-base with the ability to move around the map, bu
         "ManaGem.blp");
       Draenei.AddPower(dummyPower);
 
-      FactionManager.Register(Draenei);
+      _factionManager.Register(Draenei);
     }
   }
 }

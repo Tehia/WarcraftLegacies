@@ -6,16 +6,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class QuelthalasSetup : IService
+  public sealed class QuelthalasSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public QuelthalasSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Quelthalas { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Quelthalas = new Faction("Quel'thalas", PLAYER_COLOR_CYAN, "|C0000FFFF",
           @"ReplaceableTextures\CommandButtons\BTNSylvanusWindrunner.blp")
@@ -105,9 +109,9 @@ The Plague of Undeath is coming and Lordaeron will need your help with the Scour
       Quelthalas.ModAbilityAvailability(Constants.ABILITY_A0K5_DWARVEN_MASONRY_CASTLES_YELLOW, -1);
       Quelthalas.ModAbilityAvailability(Constants.ABILITY_A0OC_EXTRACT_VIAL_ALL, -1);
 
-      Quelthalas.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(17716, 13000)));
+      Quelthalas.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(17716, 13000)));
 
-      FactionManager.Register(Quelthalas);
+      _factionManager.Register(Quelthalas);
     }
   }
 }

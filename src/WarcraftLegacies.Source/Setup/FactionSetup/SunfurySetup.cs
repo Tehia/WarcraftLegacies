@@ -7,16 +7,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class SunfurySetup : IService
+  public sealed class SunfurySetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public SunfurySetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Sunfury { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Sunfury = new Faction("Sunfury", PLAYER_COLOR_MAROON, "|cffff0000",
           @"ReplaceableTextures\CommandButtons\BTNBloodMage2.blp")
@@ -93,10 +97,10 @@ Your main goal is to summon Kil'jaeden and destroy your enemies."
       Sunfury.ModObjectLimit(FourCC("R09G"), Faction.UNLIMITED); //Flamekeeper Adept Training
       Sunfury.ModObjectLimit(Constants.UPGRADE_R09U_SEAL_OF_BLOOD_SUNFURY, Faction.UNLIMITED); // Seal of Blood
 
-      Sunfury.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(3295, -22670)));
-      Sunfury.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(2529, -19141)));
+      Sunfury.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(3295, -22670)));
+      Sunfury.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(2529, -19141)));
 
-      FactionManager.Register(Sunfury);
+      _factionManager.Register(Sunfury);
     }
   }
 }

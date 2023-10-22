@@ -9,16 +9,20 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Responsible for creating and containing the Ironforge <see cref="Faction"/>.
   /// </summary>
-  public class IronforgeSetup : IService
+  public sealed class IronforgeSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public IronforgeSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Ironforge { get; private set; }
     
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Ironforge = new Faction("Ironforge", PLAYER_COLOR_YELLOW, "|C00FFFC01",
         @"ReplaceableTextures\CommandButtons\BTNHeroMountainKing.blp")
@@ -112,9 +116,9 @@ Stormwind is preparing for an invasion through the Dark Portal in the South. Mus
       Ironforge.ModAbilityAvailability(Constants.ABILITY_A0GC_REPLENISH_MANA_ORANGE_KEEPS_CAPITALS, -1);
       Ironforge.ModAbilityAvailability(Constants.ABILITY_A0IH_SPIKED_BARRICADES_DWARF_KEEP, -1);
       
-      Ironforge.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(12079, -2768)));
+      Ironforge.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(12079, -2768)));
       
-      FactionManager.Register(Ironforge);
+      _factionManager.Register(Ironforge);
     }
   }
 }

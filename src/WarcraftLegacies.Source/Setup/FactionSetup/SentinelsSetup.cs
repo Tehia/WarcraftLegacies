@@ -10,16 +10,22 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class SentinelsSetup : IService
+  public sealed class SentinelsSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+    private readonly AllLegendSetup _allLegendSetup;
+
     public SentinelsSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
+      _allLegendSetup = services.GetRequired<AllLegendSetup>();
     }
 
     public static Faction? Sentinels { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem, AllLegendSetup allLegendSetup)
+    public void Execute()
     {
       Sentinels = new Faction("Sentinels", PLAYER_COLOR_MINT, "|CFFBFFF80",
         @"ReplaceableTextures\CommandButtons\BTNPriestessOfTheMoon.blp")
@@ -95,7 +101,7 @@ Once you have secured your holdings, gather your army and destroy the Orcish Hor
       Sentinels.ModObjectLimit(Constants.UPGRADE_R03J_WIND_WALK_SENTINELS, Faction.UNLIMITED);
       Sentinels.ModObjectLimit(Constants.UPGRADE_R018_IMPROVED_LIGHTNING_BARRAGE_SENTINELS, Faction.UNLIMITED);
 
-      Sentinels.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-22721, -13570)));
+      Sentinels.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-22721, -13570)));
       
       Sentinels.AddPower(new DummyPower("Unspoiled Wilderness",
         "Your Control Points increase your units' movement speed by 24% in a large radius.",
@@ -103,9 +109,9 @@ Once you have secured your holdings, gather your army and destroy the Orcish Hor
       
       var worldTrees = new List<Capital>
       {
-        allLegendSetup.Druids.Nordrassil,
-        allLegendSetup.Neutral.Shaladrassil,
-        allLegendSetup.Druids.Vordrassil
+        _allLegendSetup.Druids.Nordrassil,
+        _allLegendSetup.Neutral.Shaladrassil,
+        _allLegendSetup.Druids.Vordrassil
       };
       Sentinels.AddPower(new Immortality(25, 45, worldTrees)
       {
@@ -115,7 +121,7 @@ Once you have secured your holdings, gather your army and destroy the Orcish Hor
         ResearchId = Constants.UPGRADE_YB01_IMMORTALITY_POWER_IS_ACTIVE
       });
 
-      FactionManager.Register(Sentinels);
+      _factionManager.Register(Sentinels);
     }
   }
 }

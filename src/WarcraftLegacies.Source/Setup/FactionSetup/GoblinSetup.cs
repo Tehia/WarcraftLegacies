@@ -11,16 +11,20 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Setup for the Goblin <see cref="Faction"/>
   /// </summary>
-  public class GoblinSetup : IService
+  public sealed class GoblinSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public GoblinSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction Goblin { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Goblin = new Faction("Bilgewater", PLAYER_COLOR_LIGHT_GRAY, "|cff808080",
         @"ReplaceableTextures\CommandButtons\BTNHeroTinker.blp")
@@ -103,8 +107,8 @@ The Trading Center in Kezan will unlock the ability to train Traders. Be sure to
       };
       Goblin.AddPower(oilPower);
 
-      Goblin.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-8615, -12869)));
-      FactionManager.Register(Goblin);
+      Goblin.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-8615, -12869)));
+      _factionManager.Register(Goblin);
     }
   }
 }

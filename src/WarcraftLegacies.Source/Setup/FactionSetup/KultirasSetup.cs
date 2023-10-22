@@ -6,16 +6,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class KultirasSetup : IService
+  public sealed class KultirasSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public KultirasSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Kultiras { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Kultiras =
         new Faction("Kul'tiras", PLAYER_COLOR_EMERALD, "|cff00781e", @"ReplaceableTextures\CommandButtons\BTNProudmoore.blp")
@@ -94,9 +98,9 @@ Stormwind is preparing for an invasion through the Dark Portal in the South. Mus
       Kultiras.ModObjectLimit(FourCC("H05L"), 1); //Lady Ashvane
       Kultiras.ModObjectLimit(FourCC("U026"), 1); //Meredith
 
-      Kultiras.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(4585, -13038)));
+      Kultiras.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(4585, -13038)));
 
-      FactionManager.Register(Kultiras);
+      _factionManager.Register(Kultiras);
     }
   }
 }

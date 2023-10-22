@@ -18,7 +18,7 @@ namespace TestMap.Source.Setup.FactionSetup.FactionSetup
       Dalaran.ModObjectLimit(FourCC("Rhan"), 1);
       Dalaran.ModObjectLimit(FourCC("Rhri"), 1);
       Dalaran.ModObjectLimit(FourCC("Rhde"), 1);
-      FactionManager.Register(Dalaran);
+      _factionManager.Register(Dalaran);
     }
   }
 }

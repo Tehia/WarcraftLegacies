@@ -17,7 +17,7 @@ namespace TestMap.Source.Setup
         "ReplaceableTextures\\CommandButtons\\BTNMarine.blp");
       var newPower = new DummyPower("Space", "You're from space, and can use spaceships.", "Marine");
       spaceMarines.AddPower(newPower);
-      FactionManager.Register(spaceMarines);
+      _factionManager.Register(spaceMarines);
     }
   }
 }

@@ -6,16 +6,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class WarsongSetup : IService
+  public sealed class WarsongSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public WarsongSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? WarsongClan { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       WarsongClan = new Faction("Warsong", PLAYER_COLOR_ORANGE, "|c00ff8000",
         @"ReplaceableTextures\CommandButtons\BTNHellScream.blp")
@@ -106,9 +110,9 @@ The Night Elves are aware of your presence and are gathering a mighty host again
       WarsongClan.ModObjectLimit(Constants.UPGRADE_R09O_DRINK_THE_BLOOD_OF_MANNOROTH, 1);
       WarsongClan.ModObjectLimit(Constants.UPGRADE_R09P_REVERT_BLOODPACT, 1);
 
-      WarsongClan.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-8455, -2777)));
+      WarsongClan.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-8455, -2777)));
 
-      FactionManager.Register(WarsongClan);
+      _factionManager.Register(WarsongClan);
     }
   }
 }

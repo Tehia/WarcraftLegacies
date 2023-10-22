@@ -6,16 +6,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class FrostwolfSetup : IService
+  public sealed class FrostwolfSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public FrostwolfSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Frostwolf { get; private set; }
     
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Frostwolf = new Faction("Frostwolf", PLAYER_COLOR_RED, "|c00ff0303",
         @"ReplaceableTextures\CommandButtons\BTNThrall.blp")
@@ -102,10 +106,10 @@ Salvage the wrecked ships, establish a base and gather your troops to move inlan
       
       Frostwolf.ModObjectLimit(Constants.UPGRADE_R09N_FLIGHT_PATH_WARSONG, 1);
 
-      Frostwolf.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-8793, -11350)));
-      Frostwolf.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-15828, -3120)));
+      Frostwolf.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-8793, -11350)));
+      Frostwolf.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-15828, -3120)));
       
-      FactionManager.Register(Frostwolf);
+      _factionManager.Register(Frostwolf);
     }
   }
 }

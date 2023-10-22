@@ -6,16 +6,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class LordaeronSetup : IService
+  public sealed class LordaeronSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public LordaeronSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Lordaeron { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Lordaeron = new Faction("Lordaeron", PLAYER_COLOR_LIGHT_BLUE, "|cff8080ff",
         @"ReplaceableTextures\CommandButtons\BTNArthas.blp")
@@ -106,9 +110,9 @@ If you survive the Plague, sail to the frozen wasteland of Northrend and take th
       Lordaeron.ModAbilityAvailability(Constants.ABILITY_A0GA_SUMMON_GARRISON_LORDAERON, 1);
       Lordaeron.ModAbilityAvailability(Constants.ABILITY_A0GD_SUMMON_GARRISON_STORMWIND, -1);
 
-      Lordaeron.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(13617, 8741)));
+      Lordaeron.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(13617, 8741)));
 
-      FactionManager.Register(Lordaeron);
+      _factionManager.Register(Lordaeron);
     }
   }
 }

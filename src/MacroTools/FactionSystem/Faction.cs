@@ -332,7 +332,7 @@ namespace MacroTools.FactionSystem
       }
 
       var newTeam = new Team(newTeamName);
-      FactionManager.Register(newTeam);
+      _factionManager.Register(newTeam);
       Player.SetTeam(newTeam);
     }
 

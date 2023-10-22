@@ -7,16 +7,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class FelHordeSetup : IService
+  public sealed class FelHordeSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public FelHordeSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? FelHorde { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       FelHorde = new Faction("Fel Horde", PLAYER_COLOR_GREEN, "|c0020c000",
         @"ReplaceableTextures\CommandButtons\BTNPitLord.blp")
@@ -118,11 +122,11 @@ The Alliance is gathering outside the Dark Portal to stop you, so prepare to for
 
       FelHorde.ModObjectLimit(FourCC("R090"), Faction.UNLIMITED); //Blackrock
 
-      FelHorde.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-2735, -30242)));
+      FelHorde.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-2735, -30242)));
       
-      FactionManager.Register(FelHorde);
+      _factionManager.Register(FelHorde);
 
-      JuggernautDeath.Setup(preplacedUnitSystem);
+      JuggernautDeath.Setup(_preplacedUnitSystem);
     }
   }
 }

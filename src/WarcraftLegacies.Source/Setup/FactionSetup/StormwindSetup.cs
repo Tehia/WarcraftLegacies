@@ -7,16 +7,18 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Responsible for creating and containing the Stormwind <see cref="Faction"/>.
   /// </summary>
-  public class StormwindSetup : IService
+  public sealed class StormwindSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    
     public StormwindSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
     }
 
     public static Faction? Stormwind { get; private set; }
 
-    public static void Setup()
+    public void Execute()
     {
       Stormwind = new Faction("Stormwind", PLAYER_COLOR_BLUE, "|c000042ff",
         @"ReplaceableTextures\CommandButtons\BTNKnight.blp")
@@ -120,7 +122,7 @@ Make sure to communicate with your Dwarven and Kul'tiran allies, as they will be
       Stormwind.ModAbilityAvailability(Constants.ABILITY_A0GC_REPLENISH_MANA_ORANGE_KEEPS_CAPITALS, -1);
       Stormwind.ModAbilityAvailability(Constants.ABILITY_A0K5_DWARVEN_MASONRY_CASTLES_YELLOW, -1);
 
-      FactionManager.Register(Stormwind);
+      _factionManager.Register(Stormwind);
     }
   }
 }

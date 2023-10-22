@@ -23,7 +23,7 @@ namespace WarcraftLegacies.Source.Commands
         TriggerRegisterPlayerChatEvent(trig, player, Command, true);
       TriggerAddAction(trig, Actions);
       _observers = new Team("Observers");
-      FactionManager.Register(_observers);
+      _factionManager.Register(_observers);
     }
     
     private static void Actions()

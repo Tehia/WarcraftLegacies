@@ -5,16 +5,18 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class IllidariSetup : IService
+  public sealed class IllidariSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    
     public IllidariSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
     }
 
     public static Faction? Illidari { get; private set; }
     
-    public static void Setup()
+    public void Execute()
     {
       Illidari = new Faction("Illidan", PLAYER_COLOR_VIOLET, "|cffff00ff",
         @"ReplaceableTextures\CommandButtons\BTNEvilIllidan.blp")
@@ -86,7 +88,7 @@ Support your ally in Outland by unlocking bases and coordinating with his push o
       Illidari.ModObjectLimit(FourCC("Rnsw"), Faction.UNLIMITED); //Siren Adept Training
       Illidari.ModObjectLimit(FourCC("R02V"), Faction.UNLIMITED); //Shadowcaster Adept Training
 
-      FactionManager.Register(Illidari);
+      _factionManager.Register(Illidari);
     }
   }
 }

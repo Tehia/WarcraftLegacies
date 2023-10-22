@@ -7,16 +7,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class DalaranSetup : IService
+  public sealed class DalaranSetup : IService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public DalaranSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction? Dalaran { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Dalaran = new Faction("Dalaran", PLAYER_COLOR_PINK, "|c00e55bb0",
         @"ReplaceableTextures\CommandButtons\BTNJaina.blp")
@@ -105,13 +109,13 @@ Your mages are the finest in Azeroth, be sure to utilize them alongside your her
       Dalaran.ModAbilityAvailability(Constants.ABILITY_A0GD_SUMMON_GARRISON_STORMWIND, -1);
       Dalaran.ModAbilityAvailability(Constants.ABILITY_A0K5_DWARVEN_MASONRY_CASTLES_YELLOW, -1);
 
-      Dalaran.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(9204, 2471)));
+      Dalaran.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(9204, 2471)));
 
-      Dalaran.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(7386, 6999)));
-      Dalaran.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(7716, 11657)));
-      Dalaran.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(17198, 8222)));
+      Dalaran.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(7386, 6999)));
+      Dalaran.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(7716, 11657)));
+      Dalaran.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(17198, 8222)));
 
-      FactionManager.Register(Dalaran);
+      _factionManager.Register(Dalaran);
     }
   }
 }

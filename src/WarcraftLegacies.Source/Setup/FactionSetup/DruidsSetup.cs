@@ -9,16 +9,22 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class DruidsSetup : IService
+  public sealed class DruidsSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+    private readonly AllLegendSetup _allLegendSetup;
+
     public DruidsSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
+      _allLegendSetup = services.GetRequired<AllLegendSetup>();
     }
 
     public static Faction? Druids { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem, AllLegendSetup allLegendSetup)
+    public void Execute()
     {
       Druids = new Faction("Druids", PLAYER_COLOR_BROWN, "|c004e2a04",
         @"ReplaceableTextures\CommandButtons\BTNFurion.blp")
@@ -106,13 +112,13 @@ Gather your forces and strike before the Horde can organize their efforts."
 
       Druids.SetObjectLevel(Constants.UPGRADE_REWS_WELL_SPRING, 1);
       
-      Druids.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-9200, 10742)));
+      Druids.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-9200, 10742)));
 
       var worldTrees = new List<Capital>
       {
-        allLegendSetup.Druids.Nordrassil,
-        allLegendSetup.Neutral.Shaladrassil,
-        allLegendSetup.Druids.Vordrassil
+        _allLegendSetup.Druids.Nordrassil,
+        _allLegendSetup.Neutral.Shaladrassil,
+        _allLegendSetup.Druids.Vordrassil
       };
       Druids.AddPower(new Immortality(25, 45, worldTrees)
       {
@@ -122,7 +128,7 @@ Gather your forces and strike before the Horde can organize their efforts."
         ResearchId = Constants.UPGRADE_YB01_IMMORTALITY_POWER_IS_ACTIVE
       });
       
-      FactionManager.Register(Druids);
+      _factionManager.Register(Druids);
     }
   }
 }

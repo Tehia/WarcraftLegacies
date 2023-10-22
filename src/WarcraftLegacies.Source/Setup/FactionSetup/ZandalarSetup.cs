@@ -7,16 +7,20 @@ using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public class ZandalarSetup : IService
+  public sealed class ZandalarSetup : IExecutableService
   {
+    private readonly FactionManager _factionManager;
+    private readonly PreplacedUnitSystem _preplacedUnitSystem;
+
     public ZandalarSetup(ServiceCollection services)
     {
-      throw new System.NotImplementedException();
+      _factionManager = services.GetRequired<FactionManager>();
+      _preplacedUnitSystem = services.GetRequired<PreplacedUnitSystem>();
     }
 
     public static Faction Zandalar { get; private set; }
 
-    public static void Setup(PreplacedUnitSystem preplacedUnitSystem)
+    public void Execute()
     {
       Zandalar = new Faction("Zandalar", PLAYER_COLOR_PEACH, "|cffff8c6c",
         @"ReplaceableTextures\CommandButtons\BTNHeadHunterBerserker.blp")
@@ -85,9 +89,9 @@ Join up with your allies and brace for a tough fight and counter-attack. "
       Zandalar.ModObjectLimit(FourCC("R070"), Faction.UNLIMITED); //Haruspex Training
       Zandalar.ModObjectLimit(FourCC("R071"), Faction.UNLIMITED); //Hex Training
 
-      Zandalar.AddGoldMine(preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-8900, -17000)));
+      Zandalar.AddGoldMine(_preplacedUnitSystem.GetUnit(FourCC("ngol"), new Point(-8900, -17000)));
 
-      FactionManager.Register(Zandalar);
+      _factionManager.Register(Zandalar);
     }
   }
 }

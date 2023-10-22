@@ -12,19 +12,19 @@ namespace TestMap.Source.Setup
       {
         VictoryMusic = "HeroicVictory"
       };
-      FactionManager.Register(TeamAlliance);
+      _factionManager.Register(TeamAlliance);
 
       TeamLegion = new Team("Burning Legion")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(TeamLegion);
+      _factionManager.Register(TeamLegion);
 
       TeamHorde = new Team("Horde")
       {
         VictoryMusic = "DarkVictory"
       };
-      FactionManager.Register(TeamHorde);
+      _factionManager.Register(TeamHorde);
     }
 
   }
