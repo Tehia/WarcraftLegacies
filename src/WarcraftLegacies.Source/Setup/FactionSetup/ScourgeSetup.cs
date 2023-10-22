@@ -2,12 +2,13 @@
 using MacroTools.ArtifactSystem;
 using MacroTools.FactionSystem;
 using MacroTools.Powers;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class ScourgeSetup
+  public sealed class ScourgeSetup : ISetupStep
   {
     public static Faction? Scourge { get; private set; }
 

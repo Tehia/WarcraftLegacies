@@ -1,10 +1,11 @@
 ﻿using MacroTools.Extensions;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class IllidariSetup
+  public class IllidariSetup : ISetupStep
   {
     public static Faction? Illidari { get; private set; }
     

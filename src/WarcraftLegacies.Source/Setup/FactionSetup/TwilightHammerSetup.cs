@@ -1,10 +1,11 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class TwilightHammerSetup
+  public class TwilightHammerSetup : ISetupStep
   {
     public static Faction? TwilightHammer { get; private set; }
     

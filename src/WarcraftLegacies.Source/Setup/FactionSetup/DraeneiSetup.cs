@@ -1,10 +1,11 @@
 ﻿using MacroTools.FactionSystem;
 using MacroTools.Powers;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class DraeneiSetup
+  public class DraeneiSetup : ISetupStep
   {
     public static Faction? Draenei { get; private set; }
 

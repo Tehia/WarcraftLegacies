@@ -1,4 +1,5 @@
 ﻿using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
@@ -6,7 +7,7 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Responsible for creating and containing the Stormwind <see cref="Faction"/>.
   /// </summary>
-  public static class StormwindSetup
+  public class StormwindSetup : ISetupStep
   {
     public static Faction? Stormwind { get; private set; }
 

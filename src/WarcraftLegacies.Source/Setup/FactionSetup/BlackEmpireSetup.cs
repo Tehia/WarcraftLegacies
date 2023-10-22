@@ -1,10 +1,11 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class BlackEmpireSetup
+  public class BlackEmpireSetup : ISetupStep
   {
     public static Faction? BlackEmpire { get; private set; }
     

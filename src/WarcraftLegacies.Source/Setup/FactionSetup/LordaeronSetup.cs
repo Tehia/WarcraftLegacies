@@ -1,11 +1,12 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class LordaeronSetup
+  public class LordaeronSetup : ISetupStep
   {
     public static Faction? Lordaeron { get; private set; }
 

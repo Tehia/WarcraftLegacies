@@ -13,7 +13,7 @@ namespace WarcraftLegacies.Source.Setup
       var saveManager = new SaveManager();
       setupStepCollection.Add(saveManager);
     }
-    
+
     public static void ConfigureControlPointManager(this SetupStepCollection setupStepCollection)
     {
       var controlPointManager = new ControlPointManager
@@ -35,37 +35,36 @@ namespace WarcraftLegacies.Source.Setup
       };
       setupStepCollection.Add(controlPointManager);
     }
-    
+
     public static void ConfigureFactions(this SetupStepCollection setupStepCollection)
     {
       var preplacedUnitSystem = setupStepCollection.GetRequired<PreplacedUnitSystem>();
       var artifactSetup = setupStepCollection.GetRequired<ArtifactSetup>();
       var allLegendSetup = setupStepCollection.GetRequired<AllLegendSetup>();
-      
-      ScourgeSetup.Setup(preplacedUnitSystem, artifactSetup.HelmOfDomination);
-      LegionSetup.Setup(preplacedUnitSystem);
-      LordaeronSetup.Setup(preplacedUnitSystem);
-      DalaranSetup.Setup(preplacedUnitSystem);
-      QuelthalasSetup.Setup(preplacedUnitSystem);
-      SentinelsSetup.Setup(preplacedUnitSystem, allLegendSetup);
-      DruidsSetup.Setup(preplacedUnitSystem, allLegendSetup);
-      FelHordeSetup.Setup(preplacedUnitSystem);
-      FrostwolfSetup.Setup(preplacedUnitSystem);
-      WarsongSetup.Setup(preplacedUnitSystem);
-      StormwindSetup.Setup();
-      IronforgeSetup.Setup(preplacedUnitSystem);
-      KultirasSetup.Setup(preplacedUnitSystem);
-      IllidariSetup.Setup();
-      GoblinSetup.Setup(preplacedUnitSystem);
-      DraeneiSetup.Setup();
-      ZandalarSetup.Setup(preplacedUnitSystem);
-      SunfurySetup.Setup(preplacedUnitSystem);
-      GilneasSetup.Setup(preplacedUnitSystem);
 
-      CthunSetup.Setup(preplacedUnitSystem);
-      NazjatarSetup.Setup(preplacedUnitSystem);
-      BlackEmpireSetup.Setup(preplacedUnitSystem);
-      TwilightHammerSetup.Setup(preplacedUnitSystem);
+      setupStepCollection.Add(new ScourgeSetup(preplacedUnitSystem, artifactSetup.HelmOfDomination));
+      setupStepCollection.Add(new LegionSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new LordaeronSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new DalaranSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new QuelthalasSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new SentinelsSetup(preplacedUnitSystem, allLegendSetup));
+      setupStepCollection.Add(new DruidsSetup(preplacedUnitSystem, allLegendSetup));
+      setupStepCollection.Add(new FelHordeSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new FrostwolfSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new WarsongSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new StormwindSetup());
+      setupStepCollection.Add(new IronforgeSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new KultirasSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new IllidariSetup());
+      setupStepCollection.Add(new GoblinSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new DraeneiSetup());
+      setupStepCollection.Add(new ZandalarSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new SunfurySetup(preplacedUnitSystem));
+      setupStepCollection.Add(new GilneasSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new CthunSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new NazjatarSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new BlackEmpireSetup(preplacedUnitSystem));
+      setupStepCollection.Add(new TwilightHammerSetup(preplacedUnitSystem));
     }
   }
 }

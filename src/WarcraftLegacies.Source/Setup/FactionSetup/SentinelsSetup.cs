@@ -3,13 +3,14 @@ using MacroTools;
 using MacroTools.FactionSystem;
 using MacroTools.LegendSystem;
 using MacroTools.Powers;
+using MacroTools.Setup;
 using WarcraftLegacies.Source.Powers;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class SentinelsSetup
+  public class SentinelsSetup : ISetupStep
   {
     public static Faction? Sentinels { get; private set; }
 

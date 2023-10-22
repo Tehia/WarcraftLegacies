@@ -1,11 +1,12 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class LegionSetup
+  public class LegionSetup : ISetupStep
   {
     public static Faction? Legion { get; private set; }
     

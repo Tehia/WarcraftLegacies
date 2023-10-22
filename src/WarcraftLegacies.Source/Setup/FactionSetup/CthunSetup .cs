@@ -1,10 +1,11 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class CthunSetup
+  public class CthunSetup : ISetupStep
   {
     public static Faction? Cthun { get; private set; }
     

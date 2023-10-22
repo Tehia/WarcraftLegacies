@@ -1,12 +1,13 @@
 ﻿using MacroTools;
 using MacroTools.Extensions;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class ZandalarSetup
+  public class ZandalarSetup : ISetupStep
   {
     public static Faction Zandalar { get; private set; }
 

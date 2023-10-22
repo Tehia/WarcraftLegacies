@@ -1,12 +1,13 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using WarcraftLegacies.Source.Mechanics.Fel_Horde;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class FelHordeSetup
+  public class FelHordeSetup : ISetupStep
   {
     public static Faction? FelHorde { get; private set; }
 

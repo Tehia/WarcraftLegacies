@@ -1,10 +1,11 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class NazjatarSetup
+  public class NazjatarSetup : ISetupStep
   {
     public static Faction? Nazjatar { get; private set; }
     

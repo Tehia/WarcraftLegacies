@@ -2,6 +2,7 @@
 using MacroTools.Extensions;
 using MacroTools.FactionSystem;
 using MacroTools.Powers;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
@@ -10,7 +11,7 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Setup for the Goblin <see cref="Faction"/>
   /// </summary>
-  public static class GoblinSetup
+  public class GoblinSetup : ISetupStep
   {
     public static Faction Goblin { get; private set; }
 

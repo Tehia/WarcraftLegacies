@@ -2,13 +2,14 @@
 using MacroTools;
 using MacroTools.FactionSystem;
 using MacroTools.LegendSystem;
+using MacroTools.Setup;
 using WarcraftLegacies.Source.Powers;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class DruidsSetup
+  public class DruidsSetup : ISetupStep
   {
     public static Faction? Druids { get; private set; }
 

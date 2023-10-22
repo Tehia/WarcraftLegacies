@@ -1,11 +1,12 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
 namespace WarcraftLegacies.Source.Setup.FactionSetup
 {
-  public static class QuelthalasSetup
+  public class QuelthalasSetup : ISetupStep
   {
     public static Faction? Quelthalas { get; private set; }
 

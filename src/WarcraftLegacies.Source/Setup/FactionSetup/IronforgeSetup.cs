@@ -1,5 +1,6 @@
 ﻿using MacroTools;
 using MacroTools.FactionSystem;
+using MacroTools.Setup;
 using WCSharp.Shared.Data;
 using static War3Api.Common;
 
@@ -8,7 +9,7 @@ namespace WarcraftLegacies.Source.Setup.FactionSetup
   /// <summary>
   /// Responsible for creating and containing the Ironforge <see cref="Faction"/>.
   /// </summary>
-  public static class IronforgeSetup
+  public class IronforgeSetup : ISetupStep
   {
     public static Faction? Ironforge { get; private set; }
     
